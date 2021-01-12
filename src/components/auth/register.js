@@ -17,11 +17,6 @@ const register = () => {
                         <h3>Register</h3>
                         <form action="#" method="post">
                             <div className="key">
-                                <i className="fa fa-user" aria-hidden="true" />
-                                <input type="text" defaultValue="Username" name="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" required />
-                                <div className="clearfix" />
-                            </div>
-                            <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
                                 <input type="text" defaultValue="Email" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required />
                                 <div className="clearfix" />
@@ -32,8 +27,23 @@ const register = () => {
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
-                                <i className="fa fa-lock" aria-hidden="true" />
-                                <input type="password" defaultValue="Confirm Password" name="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}" required />
+                                <i className="fa fa-envelope" aria-hidden="true" />
+                                <input type="text" defaultValue="First Name" name="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'firstName';}" required />
+                                <div className="clearfix" />
+                            </div>
+                            <div className="key">
+                                <i className="fa fa-envelope" aria-hidden="true" />
+                                <input type="text" defaultValue="Last Name" name="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'lastName';}" required />
+                                <div className="clearfix" />
+                            </div>
+                            <div className="key">
+                                <i className="fa fa-envelope" aria-hidden="true" />
+                                <input type="text" defaultValue="Address" name="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}" required />
+                                <div className="clearfix" />
+                            </div>
+                            <div className="key">
+                                <i className="fa fa-envelope" aria-hidden="true" />
+                                <input type="text" defaultValue="Phone" name="Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Number';}" required />
                                 <div className="clearfix" />
                             </div>
                             <input type="submit" defaultValue="Submit" />
