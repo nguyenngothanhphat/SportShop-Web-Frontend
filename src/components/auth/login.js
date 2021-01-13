@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { API } from '../../config';
 
-const login = () => {
+const Login = () => {
+    const [values, setValues] = useState({
+        email: '',
+        password: '',
+        error: '',
+        success: false
+    })
+
+    const handleChange = name => event => {
+        setValues({ ...values, error: false, [name]: event.target.value })
+    }
     return (
         <div>
             {/* Banner */}
@@ -20,14 +31,15 @@ const login = () => {
                         <form action="#" method="post">
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="Email" name="Email" />
+                                <input type="text" defaultValue="Email" name="Email" onChange={handleChange('email')} />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-lock" aria-hidden="true" />
-                                <input type="password" defaultValue="Password" name="Password" />
+                                <input type="password" defaultValue="Password" name="Password" onChange={handleChange('password')} />
                                 <div className="clearfix" />
                             </div>
+                            {JSON.stringify(values)}
                             <input type="submit" defaultValue="Login" />
                         </form>
                     </div>
@@ -42,4 +54,4 @@ const login = () => {
     )
 }
 
-export default login;
+export default Login;

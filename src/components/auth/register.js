@@ -1,6 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const register = () => {
+const Register = () => {
+    const [values, setValues] = useState({
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phone: '',
+        error: '',
+        success: false
+    })
+
+    const {email, password, firstName, lastName, address, phone} = values;
+
+    const handleChange = name => event => {
+        setValues({ ...values, error: false, [name]: event.target.value })
+    }
+
+    const login = (email, password, firstName, lastName, address, phone) => {
+        console.log(email, password, firstName, lastName, address, phone)
+    }
+
+    const clickSubmit = (event) => {
+        event.preventDefault()
+        login(email, password, firstName, lastName, address, phone)
+    }
     return (
         <div>
             <div className="banner-top">
@@ -18,35 +43,35 @@ const register = () => {
                         <form action="#" method="post">
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="Email" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required />
+                                <input type="text" defaultValue="Email" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" onChange={handleChange('email')} required />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-lock" aria-hidden="true" />
-                                <input type="password" defaultValue="Password" name="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required />
+                                <input type="password" defaultValue="Password" name="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" onChange={handleChange('password')} required />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="First Name" name="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'firstName';}" required />
+                                <input type="text" defaultValue="First Name" name="First Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'firstName';}" onChange={handleChange('firstName')} required />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="Last Name" name="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'lastName';}" required />
+                                <input type="text" defaultValue="Last Name" name="Last Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'lastName';}" onChange={handleChange('lastName')} required />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="Address" name="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}" required />
+                                <input type="text" defaultValue="Address" name="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}" onChange={handleChange('address')} required />
                                 <div className="clearfix" />
                             </div>
                             <div className="key">
                                 <i className="fa fa-envelope" aria-hidden="true" />
-                                <input type="text" defaultValue="Phone" name="Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Number';}" required />
+                                <input type="text" defaultValue="Phone" name="Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Number';}" onChange={handleChange('phone')} required />
                                 <div className="clearfix" />
                             </div>
-                            <input type="submit" defaultValue="Submit" />
+                            <input onClick={clickSubmit} type="submit" defaultValue="Submit" />
                         </form>
                     </div>
                 </div>
@@ -55,4 +80,4 @@ const register = () => {
     )
 }
 
-export default register;
+export default Register;
