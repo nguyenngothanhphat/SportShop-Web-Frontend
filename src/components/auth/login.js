@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../../config';
+// import { API } from '../../config';
 
 const Login = () => {
     const [values, setValues] = useState({
@@ -39,7 +39,6 @@ const Login = () => {
                                 <input type="password" defaultValue="Password" name="Password" onChange={handleChange('password')} />
                                 <div className="clearfix" />
                             </div>
-                            {JSON.stringify(values)}
                             <input type="submit" defaultValue="Login" />
                         </form>
                     </div>
