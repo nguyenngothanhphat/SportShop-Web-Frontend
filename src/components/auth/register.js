@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {login} from '../../util/api/auth-apis'
+import {register} from '../../util/api/auth-apis'
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -21,10 +21,10 @@ const Register = () => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const clickSubmit = (event) => {
-    event.preventDefault();
+  const clickSubmit = (e) => {
+    e.preventDefault();
     setValues({ ...values, error: false });
-    login({ email, password, firstName, lastName, address, phoneNumber }).then(
+    register({ email, password, firstName, lastName, address, phoneNumber }).then(
       (data) => {
       console.log("🚀 ~ file: register.js ~ line 45 ~ clickSubmit ~ data", data.message)
         if (data.message) {
