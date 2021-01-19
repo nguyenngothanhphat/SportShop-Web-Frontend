@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button } from '@material-ui/core';
 
-import {logout} from '../../util/api/auth-apis';
+import { logout, isAuthenticate } from '../../util/api/auth-apis';
 
 const header = () => {
     return (
@@ -27,20 +27,28 @@ const header = () => {
                         </Grid>
                         <Grid item md={3} lg={3} xl={4}>
                             <Grid container className="bk_cart_sd">
-                                <Grid item md={3} lg={3} xl={3} className="btn_login">
-                                    <Link to={"/login"}>
-                                        <Button className="login" variant="outlined"><span>Login</span></Button>
-                                    </Link>
-                                </Grid>
-                                <Grid item md={3} lg={3} xl={3} className="btn_logout">
-                                    <Link to={"/"}>
-                                        <Button className="logout" onClick={() => {
-                                            logout(() => {
-                                                console.log("logout successful")
-                                            })
-                                        }} variant="outlined"><span>Logout</span></Button>
-                                    </Link>
-                                </Grid>
+                                {!isAuthenticate() && (
+                                    <Fragment>
+                                        <Grid item md={3} lg={3} xl={3} className="btn_login">
+                                            <Link to={"/login"}>
+                                                <Button className="login" variant="outlined"><span>Login</span></Button>
+                                            </Link>
+                                        </Grid>
+                                    </Fragment>
+                                )}
+
+                                {isAuthenticate() && (
+                                    <Grid item md={3} lg={3} xl={3} className="btn_logout">
+                                        <Link to={"/"}>
+                                            <Button className="logout" onClick={() => {
+                                                logout(() => {
+                                                    console.log("logout successful")
+                                                })
+                                            }} variant="outlined"><span>Logout</span></Button>
+                                        </Link>
+                                    </Grid>
+                                )}
+
                                 <Grid item md={3} lg={3} xl={3} className="cart">
                                     <Link to="/carts">
                                         <Button className="cart_item" variant="outlined">
