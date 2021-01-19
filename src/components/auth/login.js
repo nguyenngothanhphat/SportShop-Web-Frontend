@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-// import { API } from '../../config';
+import { Link, Redirect } from "react-router-dom";
+import { login, authenticate } from "../../util/api/auth-apis"
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -24,9 +24,39 @@ const Login = () => {
       console.log("🚀 ~ file: login.js ~ line 21 ~ clickSubmit ~ data", data);
       if (data.message) {
         setValues({ ...values, error: data.message, loading: false });
+      } else {
+        authenticate(data, () => {
+          setValues({
+            ...values,
+            redirectToRefferer: true
+          })
+        })
       }
     });
   };
+
+  const showError = () => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
+
+  const showLoading = () => {
+    loading && (
+      <div className="alert alert-info">
+        <h2>Loading ...</h2>
+      </div>
+    )
+  }
+
+  const redirectUser = () => {
+    if (redirectToRefferer) {
+      return <Redirect to="/" />
+    }
+  }
   return (
     <div>
       {/* Banner */}
@@ -45,14 +75,18 @@ const Login = () => {
         <div className="main-agileits">
           <div className="form-w3agile">
             <h3>Login</h3>
+            {showError()}
+            {showLoading()}
+            {redirectUser()}
             <form action="#" method="post">
               <div className="key">
                 <i className="fa fa-envelope" aria-hidden="true" />
                 <input
                   type="text"
-                  defaultValue="Email"
+                  placeholder="Email"
                   name="Email"
                   onChange={handleChange("email")}
+                  value={email}
                 />
                 <div className="clearfix" />
               </div>
@@ -60,13 +94,14 @@ const Login = () => {
                 <i className="fa fa-lock" aria-hidden="true" />
                 <input
                   type="password"
-                  defaultValue="Password"
+                  placeholder="Password"
                   name="Password"
                   onChange={handleChange("password")}
+                  value={password}
                 />
                 <div className="clearfix" />
               </div>
-              <input type="submit" defaultValue="Login" />
+              <input onClick={clickSubmit} type="submit" defaultValue="Login" />
             </form>
           </div>
           <div className="forg">

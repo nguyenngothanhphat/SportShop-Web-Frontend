@@ -37,3 +37,26 @@ export const login = (user) => {
       console.log("🚀 ~ file: auth-apis.js ~ line 36 ~ login ~ err", err);
     });
 };
+
+export const logout = (next) => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem("jwt");
+    next();
+    return fetch(`${API}/auth/logout`, {
+      method: "GET"
+    })
+    .then(res => {
+      console.log("logout", res)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+}
+
+export const authenticate = (data, next) => { 
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('jwt', JSON.stringify(data));
+    next();
+  }
+}
