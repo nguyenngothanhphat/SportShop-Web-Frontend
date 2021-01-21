@@ -11,7 +11,7 @@ const UserDashboard = () => {
     }
     return (
         <div className="container">
-            <Navbar />
+            <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
             <h1>React dashboard</h1>
         </div>
     )

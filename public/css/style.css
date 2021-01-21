@@ -117,6 +117,9 @@ button.close.close-w3 {
     bottom: 0px;
     right: 0;
 }
+.single-top-main {
+    margin-top: 50px;
+}
 /*----*/
 img.img-head {
     position: absolute;
@@ -3106,6 +3109,7 @@ p.fo-para {
 }
 .single-top {
     width: 85%;
+
 }
 
 a.at-in {

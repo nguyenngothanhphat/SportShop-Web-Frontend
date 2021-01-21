@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { login, authenticate } from "../../util/api/auth-apis"
 
+import Header from '../header/index';
+import Footer from '../footer/index';
+
 const Login = () => {
   const [values, setValues] = useState({
     email: "",
@@ -59,6 +62,7 @@ const Login = () => {
   }
   return (
     <div>
+      <Header />
       {/* Banner */}
       <div className="banner-top">
         <div className="container">
@@ -115,6 +119,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
