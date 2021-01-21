@@ -1,11 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import Header from './components/header';
-// import Footer from './components/footer';
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import home from './components/home/index';
-import UserDashboard from './components/admin/dashboard/userDashboard'
+import UserDashboard from './admin/components/dashboard/userDashboard'
 
 const Routes = () => {
     return (
