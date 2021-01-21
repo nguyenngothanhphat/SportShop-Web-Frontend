@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import {register} from '../../util/api/auth-apis'
 
+import Header from '../header/index';
+import Footer from '../footer/index';
+
 const Register = () => {
   const [values, setValues] = useState({
     email: "",
@@ -62,6 +65,7 @@ const Register = () => {
   )
   return (
     <div>
+      <Header />
       <div className="banner-top">
         <div className="container">
           <h3>Register</h3>
@@ -169,6 +173,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
