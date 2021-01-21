@@ -1,6 +1,6 @@
 import React from 'react';
 import "./navbar.css";
-// import avatar from "../../../../public/images/avatar.svg";
+import avatar from "../../assets/avatar.svg";
 
 const Navbar = ({sidebarOpen, openSidebar}) => {
     return (
@@ -19,6 +19,9 @@ const Navbar = ({sidebarOpen, openSidebar}) => {
                 </a>
                 <a href="#">
                     <i className="fa fa-clock-o"></i>
+                </a>
+                <a href="#">
+                    <img width="30" src={avatar} alt="avatar" />
                 </a>
             </div>
         </nav>
