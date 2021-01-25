@@ -665,7 +665,12 @@ span.fa.fa-shopping-cart.my-cart-icon {
     margin-bottom: 3em;
     margin-top: 8em;
 }
-.spec h3{
+.speci {
+    text-align: center;
+    margin-bottom: 3em;
+    margin-top: 2em;
+}
+.spec h3, .speci h3{
     font-size:3em;
 	color:#000;
 	margin-bottom:0.5em;
