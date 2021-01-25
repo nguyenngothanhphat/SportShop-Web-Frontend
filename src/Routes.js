@@ -6,6 +6,7 @@ import home from './components/home/index';
 import Contact from './components/contact/index';
 import SingleProduct from './components/singleproduct/index'
 import UserDashboard from './admin/components/dashboard/userDashboard'
+import Cart from './components/cart/index';
 
 const Routes = () => {
     return (
@@ -18,6 +19,7 @@ const Routes = () => {
                         <Route path="/register" exact component={Register} />
                         <Route path="/contact" exact component={Contact} />
                         <Route path="/detail" exact component={SingleProduct} />
+                        <Route path="/cart" exact component={Cart} />
                     </Switch>
                 </BrowserRouter>
                 <BrowserRouter>
