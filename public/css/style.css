@@ -575,6 +575,23 @@ span.fa.fa-shopping-cart.my-cart-icon {
     border: 2px solid #039445;
     outline: none !important;
 }
+.btn_profile {
+    text-align: center;
+}
+.btn_profile .profile_item {
+    padding: 9px 47px;
+    font-size: 12px;
+    width: 50%;
+    color: #fff;
+    background: none;
+    border: 1px solid #fab005;
+}
+.btn_profile .profile_item:hover {
+    color: #fff;
+    background: #039445;
+    border: 2px solid #039445;
+    outline: none !important;
+}
 .cart_item{
     border: 1px solid #fab005 !important;
 }
@@ -3512,4 +3529,7 @@ h1.t-button {
 .grid_3 p, .page-header p {
     font-size: 13px;
 }
+}
+.jumbotron {
+    padding-top: 18rem;
 }
