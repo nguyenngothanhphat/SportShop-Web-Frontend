@@ -6,11 +6,15 @@ import home from './components/home/index';
 import Contact from './components/contact/index';
 import SingleProduct from './components/singleproduct/index'
 import Cart from './components/cart/index';
+import PrivateRoute from './components/auth/PrivateRoute';
+import AdminRoute from './components/auth/AdminRoute';
+import UserDashboard from './components/auth/userDashboard';
+import AdminDashboard from './components/auth/AdminDashboard';
 
 const Routes = () => {
     return (
         <main>
-            <div >
+            <div>
                 <BrowserRouter>
                     <Switch>
                         <Route path="/" exact component={home} />
@@ -19,6 +23,8 @@ const Routes = () => {
                         <Route path="/contact" exact component={Contact} />
                         <Route path="/detail" exact component={SingleProduct} />
                         <Route path="/carts" exact component={Cart} />
+                        <PrivateRoute path="/account" exact component={UserDashboard} />
+                        <AdminRoute path="/dashboard" exact component={AdminDashboard} />
                     </Switch>
                 </BrowserRouter>
             </div>
