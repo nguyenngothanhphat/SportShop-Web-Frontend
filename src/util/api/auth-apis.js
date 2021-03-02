@@ -2,7 +2,6 @@ import React from "react";
 import { API } from "../../config";
 
 export const register = (user) => {
-  // console.log(user);
   return fetch(`${API}/auth/signup`, {
     method: "POST",
     headers: {
