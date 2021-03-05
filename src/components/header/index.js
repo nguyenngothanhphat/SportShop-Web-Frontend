@@ -5,7 +5,8 @@ import { Grid, Button } from '@material-ui/core';
 import { logout, isAuthenticate } from '../../util/api/auth-apis';
 
 const header = () => {
-    const { user: { role } } = isAuthenticate();
+    // const { user: { role } } = isAuthenticate();
+    // console.log("🚀 ~ file: index.js ~ line 9 ~ header ~ role", role)
     return (
         <div>
             <Grid container className="header_info">
@@ -40,9 +41,9 @@ const header = () => {
                                 )}
 
                                 {isAuthenticate() && (
-                                    <Fragment>
+                                    <div>
                                         <Grid item md={3} lg={3} xl={3} className="btn_profile">
-                                            <Link to={role === 1 ? "/dashboard" : "/account"}>
+                                            <Link to="/">
                                                 <Button className="profile_item" variant="outlined">
                                                     <span>Profile</span>
                                                 </Button>
@@ -57,7 +58,7 @@ const header = () => {
                                                 }} variant="outlined"><span>Logout</span></Button>
                                             </Link>
                                         </Grid>
-                                    </Fragment>
+                                    </div>
                                 )}
 
                                 <Grid item md={3} lg={3} xl={3} className="cart">
