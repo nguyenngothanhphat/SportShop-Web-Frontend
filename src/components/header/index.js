@@ -18,7 +18,7 @@ const header = () => {
                                     food supplement</span></Link></h1>
                             </div>
                         </Grid>
-                        <Grid item md={6} lg={7} xl={6}>
+                        <Grid item md={3} lg={5} xl={3}>
                             <div className="search-form">
                                 <form action="#" method="post">
                                     <input type="text" name="search" placeholder="Search for Products..." />
@@ -26,7 +26,7 @@ const header = () => {
                                 </form>
                             </div>
                         </Grid>
-                        <Grid item md={3} lg={3} xl={4}>
+                        <Grid item md={6} lg={5} xl={6}>
                             <Grid container className="bk_cart_sd">
 
                                 {!isAuthenticate() && (
