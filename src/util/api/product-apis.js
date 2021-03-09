@@ -1,6 +1,9 @@
 import { API } from '../../config';
 
 export const createProduct = (userId, token, product) => {
+    console.log("🚀 ~ file: product-apis.js ~ line 4 ~ createProduct ~ userId", userId)
+    console.log("🚀 ~ file: product-apis.js ~ line 4 ~ createProduct ~ token", token)
+    console.log("🚀 ~ file: product-apis.js ~ line 4 ~ createProduct ~ product", product)
     return fetch(`${API}/admin/product/create/${userId}`, {
         method: "POST",
         headers: {

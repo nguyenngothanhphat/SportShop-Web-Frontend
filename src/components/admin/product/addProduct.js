@@ -2,31 +2,34 @@ import React, { useState, useEffect } from "react";
 import { isAuthenticate } from "../../../util/api/auth-apis";
 import { Link } from "react-router-dom";
 import { createProduct } from "../../../util/api/product-apis";
+import { getCategories } from "../../../util/api/category-apis";
 
 import Header from "../../header/index";
 import Footer from "../../footer/index";
 
 const AddProduct = () => {
-  const { user, token } = isAuthenticate();
+
   const [values, setValues] = useState({
-    name: "",
-    rate: "",
-    price: "",
-    description: "",
+    name: '',
+    rate: '',
+    price: '',
+    description: '',
     categories: [],
-    category: "",
+    category: '',
     brands: [],
-    brand: "",
-    quantity: "",
-    image: "",
-    shipping: "",
+    brand: '',
+    quantity: '',
+    image: '',
+    shipping: '',
+    status: '',
     loading: false,
-    error: "",
-    createdProduct: "",
+    error: '',
+    createdProduct: '',
     redirectToProfile: false,
-    formData: "",
+    formData: ''
   });
 
+  const { user, token } = isAuthenticate();
   const {
     name,
     rate,
@@ -39,6 +42,7 @@ const AddProduct = () => {
     quantity,
     image,
     shipping,
+    status,
     loading,
     error,
     createdProduct,
@@ -46,32 +50,51 @@ const AddProduct = () => {
     formData,
   } = values;
 
-  useEffect(() => {
-    setValues({ ...values, formData: new FormData() });
-  });
-
-  const handleChange = (name) => (event) => {
-    const value = name === "image" ? event.target.files[0] : event.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value });
-  };
-
-  const clickSubmit = (event) => {
-    event.preventDefault();
-    setValues({ ...values, error: "", loading: true });
-
-    createProduct(user._id, token, formData).then((data) => {
+  const init = () => {
+    getCategories().then(data => {
+      console.log("🚀 ~ file: addProduct.js ~ line 55 ~ getCategories ~ data", data)
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
         setValues({
           ...values,
-          name: "",
-          rate: "",
-          price: "",
-          description: "",
-          quantity: "",
-          image: "",
+          categories: data,
+          formData: new FormData()
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+
+  const handleChange = name => event => {
+    const value = name === "image" ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
+    // console.log("formData", formData);
+    setValues({ ...values, [name]: value });
+  };
+
+  const clickSubmit = event => {
+    event.preventDefault();
+    setValues({ ...values, error: '', loading: true });
+
+    createProduct(user._id, token, formData).then((data) => {
+      console.log("🚀 ~ file: addProduct.js ~ line 66 ~ createProduct ~ data", data)
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          name: '',
+          rate: '',
+          price: '',
+          description: '',
+          quantity: '',
+          image: '',
+          status: '',
           loading: false,
           createdProduct: data.name
         });
@@ -79,8 +102,10 @@ const AddProduct = () => {
     });
   };
 
-  const newPostForm = () => {
-    return (
+  console.log("abc", categories);
+
+  const newPostForm = () => (
+    
       <form className="mb-3" onSubmit={clickSubmit}>
         <h4>Post Photo</h4>
         <div className="form-group">
@@ -94,7 +119,7 @@ const AddProduct = () => {
           </label>
         </div>
         <div className="form-group">
-          <label>Product Name:</label>
+          <label className="text-muted">Product Name:</label>
           <input
             onChange={handleChange("name")}
             type="text"
@@ -114,7 +139,7 @@ const AddProduct = () => {
           <label className="text-muted">Product Rate:</label>
           <input
             onChange={handleChange("rate")}
-            type="text"
+            type="number"
             className="form-control"
             value={rate}
           />
@@ -130,10 +155,13 @@ const AddProduct = () => {
         </div>
         <div className="form-group">
           <label className="text-muted">Category:</label>
-          <select onChange={handleChange("category")} className="form-group">
-            <option value="5fee0d26e8e55232185a9b33">Select</option>
-            <option value="5fee0d26e8e55232185a9b33">Whey Protein</option>
-          </select>
+          {categories.map((categoryss, key) => {
+              <select onChange={handleChange("category")} className="form-group">
+              <option>Select Options</option>
+              <option>{categoryss.categoryName}</option>
+            </select>
+          })}
+          
         </div>
         <div className="form-group">
           <label className="text-muted">Brand:</label>
@@ -152,6 +180,15 @@ const AddProduct = () => {
           />
         </div>
         <div className="form-group">
+          <label className="text-muted">Status:</label>
+          <input
+            onChange={handleChange("status")}
+            type="text"
+            className="form-control"
+            value={status}
+          />
+        </div>
+        <div className="form-group">
           <label className="text-muted">Shipping:</label>
           <select onChange={handleChange("shipping")} className="form-group">
             <option value="0">No</option>
@@ -160,8 +197,8 @@ const AddProduct = () => {
         </div>
         <button className="btn btn-outline-primary">Create Product</button>
       </form>
-    );
-  };
+    
+  );
 
   return (
     <div>
