@@ -105,99 +105,103 @@ const AddProduct = () => {
   console.log("abc", categories);
 
   const newPostForm = () => (
-    
-      <form className="mb-3" onSubmit={clickSubmit}>
-        <h4>Post Photo</h4>
-        <div className="form-group">
-          <label className="btn btn-secondary">
-            <input
-              onChange={handleChange("image")}
-              type="file"
-              name="image"
-              accept="image/*"
-            />
-          </label>
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Product Name:</label>
+
+    <form className="mb-3" onSubmit={clickSubmit}>
+      <h4>Post Photo</h4>
+      <div className="form-group">
+        <label className="btn btn-secondary">
           <input
-            onChange={handleChange("name")}
-            type="text"
-            className="form-control"
-            value={name}
+            onChange={handleChange("image")}
+            type="file"
+            name="image"
+            accept="image/*"
           />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Product Description:</label>
-          <textarea
-            onChange={handleChange("description")}
-            className="form-control"
-            value={description}
-          />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Product Rate:</label>
-          <input
-            onChange={handleChange("rate")}
-            type="number"
-            className="form-control"
-            value={rate}
-          />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Product Price:</label>
-          <input
-            onChange={handleChange("price")}
-            type="number"
-            className="form-control"
-            value={price}
-          />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Category:</label>
-          {categories.map((categoryss, key) => {
-              <select onChange={handleChange("category")} className="form-group">
-              <option>Select Options</option>
-              <option>{categoryss.categoryName}</option>
-            </select>
-          })}
-          
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Brand:</label>
-          <select onChange={handleChange("brand")} className="form-group">
-            <option value="5fef2f5cfe689a3cc03e036105">Select</option>
-            <option value="5fef2f5cfe689a3cc03e036105">MyProtein</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Quantity:</label>
-          <input
-            onChange={handleChange("quantity")}
-            type="number"
-            className="form-control"
-            value={quantity}
-          />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Status:</label>
-          <input
-            onChange={handleChange("status")}
-            type="text"
-            className="form-control"
-            value={status}
-          />
-        </div>
-        <div className="form-group">
-          <label className="text-muted">Shipping:</label>
-          <select onChange={handleChange("shipping")} className="form-group">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-          </select>
-        </div>
-        <button className="btn btn-outline-primary">Create Product</button>
-      </form>
-    
+        </label>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Product Name:</label>
+        <input
+          onChange={handleChange("name")}
+          type="text"
+          className="form-control"
+          value={name}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Product Description:</label>
+        <textarea
+          onChange={handleChange("description")}
+          className="form-control"
+          value={description}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Product Rate:</label>
+        <input
+          onChange={handleChange("rate")}
+          type="number"
+          className="form-control"
+          value={rate}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Product Price:</label>
+        <input
+          onChange={handleChange("price")}
+          type="number"
+          className="form-control"
+          value={price}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Category:</label>
+        <select onChange={handleChange("category")} className="form-group">
+          <option>Select Options</option>
+          {
+            categories.map((c, i) => {
+              return (
+                <option key={i} value={c._id}>
+                  {c.categoryName}
+                </option>
+              )
+            })}
+        </select>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Brand:</label>
+        <select onChange={handleChange("brand")} className="form-group">
+          <option value="5fef2f5cfe689a3cc03e036105">Select</option>
+          <option value="5fef2f5cfe689a3cc03e036105">MyProtein</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Quantity:</label>
+        <input
+          onChange={handleChange("quantity")}
+          type="number"
+          className="form-control"
+          value={quantity}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Status:</label>
+        <input
+          onChange={handleChange("status")}
+          type="text"
+          className="form-control"
+          value={status}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Shipping:</label>
+        <select onChange={handleChange("shipping")} className="form-group">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+      <button className="btn btn-outline-primary">Create Product</button>
+    </form>
+
   );
 
   return (
