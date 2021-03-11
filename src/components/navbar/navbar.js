@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../button/button'
 import { Link } from 'react-router-dom'
-import '../navbar/navbar.css'
+import './navbar.css'
 import Dropdown from '../dropdown/dropdown';
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
               Hone
             </Link>
           </li>
-          <li className="nav-item" >
+          <li className="nav-item" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <Link to="/khuyenmai" className="nav-links" onClick={closeMobileMenu}>
               Khuyến mãi <i className='fas fa-caret-down' />
             </Link>
@@ -50,7 +50,6 @@ const Navbar = () => {
             <Link to="/thuonghieu" className="nav-links" onClick={closeMobileMenu}>
               Thương hiệu <i className='fas fa-caret-down' />
             </Link>
-            
           </li>
           <li className="nav-item">
             <Link to="/sanpham" className="nav-links" onClick={closeMobileMenu}>
