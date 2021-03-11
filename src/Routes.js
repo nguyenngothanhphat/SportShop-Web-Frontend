@@ -12,27 +12,24 @@ import UserDashboard from './components/auth/userDashboard';
 import AdminDashboard from './components/auth/AdminDashboard';
 import AddCategory from './components/admin/category/addCategory';
 import AddProduct from './components/admin/product/addProduct';
+import './styles.css'
 
 const Routes = () => {
     return (
-        <main>
-            <div>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/" exact component={home} />
-                        <Route path="/login" exact component={Login} />
-                        <Route path="/register" exact component={Register} />
-                        <Route path="/contact" exact component={Contact} />
-                        <Route path="/detail" exact component={SingleProduct} />
-                        <Route path="/carts" exact component={Cart} />
-                        <PrivateRoute path="/account" exact component={UserDashboard} />
-                        <AdminRoute path="/dashboard" exact component={AdminDashboard} />
-                        <AdminRoute path="/create/category" exact component={AddCategory} />
-                        <AdminRoute path="/create/product" exact component={AddProduct} />
-                    </Switch>
-                </BrowserRouter>
-            </div>
-        </main>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/" exact component={home} />
+                <Route path="/signin" exact component={Login} />
+                <Route path="/register" exact component={Register} />
+                <Route path="/contact" exact component={Contact} />
+                <Route path="/detail" exact component={SingleProduct} />
+                <Route path="/carts" exact component={Cart} />
+                <PrivateRoute path="/account" exact component={UserDashboard} />
+                <AdminRoute path="/dashboard" exact component={AdminDashboard} />
+                <AdminRoute path="/create/category" exact component={AddCategory} />
+                <AdminRoute path="/create/product" exact component={AddProduct} />
+            </Switch>
+        </BrowserRouter>
     )
 }
 

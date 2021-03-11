@@ -10,7 +10,7 @@ const Dropdown = () => {
     <>
       <ul
         onClick={handleClick}
-        className={click ? "dropdown-menu clicked" : "dropdown-menu"}
+        className={click ? "dropdown--menu clicked" : "dropdown--menu"}
       >
         {MenuItems.map((item, index) => {
           return (

@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { login, authenticate, isAuthenticate } from "../../util/api/auth-apis"
 
-import Header from '../header/index';
-import Footer from '../footer/index';
-
 const Login = () => {
   const [values, setValues] = useState({
     email: "",
@@ -64,33 +61,48 @@ const Login = () => {
         return <Redirect to="/account" />
       }
     }
-    if (isAuthenticate()) {
-      return <Redirect to="/" />;
-    }
+    // if (isAuthenticate()) {
+    //   return <Redirect to="/" />;
+    // }
   }
   return (
-    <div>
-      <Header />
-      {/* Banner */}
-      <div className="banner-top">
-        <div className="container">
-          <h3>Login</h3>
-          <h4>
-            <Link to="/">Home</Link>
-            <label>/</label>Login
-          </h4>
-          <div className="clearfix"> </div>
-        </div>
+    <div className="background">
+      <div className="center">
+        <h1>Login</h1>
+        {showError()}
+        {showLoading()}
+        {redirectUser()}
+        <form method="POST">
+          <div className="txt_field">
+            <input type="text" name="Email" onChange={handleChange("email")} value={email} />
+            <span></span>
+            <label>Email: </label>
+          </div>
+          <div className="txt_field">
+            <input type="password" name="Password" onChange={handleChange("password")} value={password} />
+            <span></span>
+            <label>Password: </label>
+          </div>
+          <div className="pass">Forgot Password ?</div>
+          <input onClick={clickSubmit} type="submit" value="Login" />
+          <div className="signup_link">
+            Not a member ? <Link to="/register">Sign up</Link>
+          </div>
+        </form>
       </div>
-      {/* Login */}
-      <div className="login">
-        <div className="main-agileits">
+    </div>
+  );
+};
+
+export default Login;
+
+{/* <div className="main-agileits">
           <div className="form-w3agile">
             <h3>Login</h3>
             {showError()}
             {showLoading()}
-            {redirectUser()}
-            <form action="#" method="post">
+
+            <form>
               <div className="key">
                 <i className="fa fa-envelope" aria-hidden="true" />
                 <input
@@ -116,20 +128,4 @@ const Login = () => {
               <input onClick={clickSubmit} type="submit" defaultValue="Login" />
             </form>
           </div>
-          <div className="forg">
-            <Link to="#" className="forg-left">
-              Forgot Password
-            </Link>
-            <Link to="/register" className="forg-right">
-              Register
-            </Link>
-            <div className="clearfix" />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
-};
-
-export default Login;
+        </div> */}
