@@ -11,7 +11,6 @@ export const getCategories = () => {
 };
 
 export const createCategory = (userId, token, category) => {
-    console.log("🚀 ~ file: category-apis.js ~ line 5 ~ createCategory ~ category", category)
     return fetch(`${API}/admin/category/create/${userId}`, {
         method: "POST",
         headers: {
@@ -19,7 +18,7 @@ export const createCategory = (userId, token, category) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(category)
+        body: JSON.stringify(category),
     })
         .then(res => {
             console.log("🚀 ~ file: category-apis.js ~ line 15 ~ createCategory ~ res", res);

@@ -61,9 +61,9 @@ const Login = () => {
         return <Redirect to="/account" />
       }
     }
-    // if (isAuthenticate()) {
-    //   return <Redirect to="/" />;
-    // }
+    if (isAuthenticate()) {
+      return <Redirect to="/" />;
+    }
   }
   return (
     <div className="background">
@@ -85,7 +85,7 @@ const Login = () => {
           </div>
           <div className="pass">Forgot Password ?</div>
           <input onClick={clickSubmit} type="submit" value="Login" />
-          <div className="signup_link">
+          <div className="signin_link">
             Not a member ? <Link to="/register">Sign up</Link>
           </div>
         </form>
@@ -95,37 +95,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{/* <div className="main-agileits">
-          <div className="form-w3agile">
-            <h3>Login</h3>
-            {showError()}
-            {showLoading()}
-
-            <form>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="Email"
-                  name="Email"
-                  onChange={handleChange("email")}
-                  value={email}
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-lock" aria-hidden="true" />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="Password"
-                  onChange={handleChange("password")}
-                  value={password}
-                />
-                <div className="clearfix" />
-              </div>
-              <input onClick={clickSubmit} type="submit" defaultValue="Login" />
-            </form>
-          </div>
-        </div> */}

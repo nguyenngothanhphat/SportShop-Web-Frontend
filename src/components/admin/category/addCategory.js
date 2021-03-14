@@ -4,68 +4,77 @@ import { Link } from 'react-router-dom';
 import { createCategory } from '../../../util/api/category-apis';
 
 import Header from '../../header/index';
-import Footer from '../../footer/index';
 
 const AddCategory = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    // const [values, setValues] = useState({
-    //     name: "",
-    //     description: "",
-    // })
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [values, setValues] = useState({
+        categoryName: "",
+        description: "",
+        error: "",
+        success: false,
+    });
+
+    const { categoryName, description, success, error } = values;
 
     const { user, token } = isAuthenticate();
 
     const handleChange = (name) => (event) => {
-        setError('');
-        setName({ [name]: event.target.value });
+        setValues({ ...values, error: false, [name]: event.target.value });
     }
 
-    const clickSubmit = (event) => {
-        event.preventDefault();
-        setError('');
-        setSuccess(false);
+    const clickSubmit = (e) => {
+        e.preventDefault();
+        setValues({ ...values, error: false });
 
         /* Make request to api to create category */
-        createCategory(user._id, token, { name, description }).then(data => {
+        createCategory(user._id, token, { categoryName, description }).then(data => {
+            console.log("🚀 ~ file: addCategory.js ~ line 30 ~ createCategory ~ data", data)
             if (data.error) {
-                setError(true);
+                setValues({ ...values, error: data.error, success: false })
             } else {
-                setError('');
-                setSuccess(true);
+                setValues({
+                    ...values,
+                    categoryName: "",
+                    description: "",
+                    error: "",
+                    success: true,
+                });
             }
         })
     }
 
     const addCategoryForm = () => {
         return (
-            <form onSubmit={clickSubmit}>
-                <div className="form-group">
-                    <label className="text-muted">Name</label>
-                    <input type="text" className="form-control" onChange={handleChange} value={name} autoFocus required />
-                </div>
-                <div className="form-group">
-                    <label className="text-muted">Description</label>
-                    <input type="text" className="form-control" onChange={handleChange} value={description} autoFocus required />
-                </div>
-                <button className="btn btn-outline-primary">Add</button>
-            </form>
+            <div className="cate-container">
+                <h1 className="cate-title">Category</h1>
+                <label className="custom-field">
+                    <input type="text" name="categoryName" id="categoryName" onChange={handleChange('categoryName')} value={categoryName} autoFocus required />
+                    <span className="placeholder">Category Name: </span>
+                </label>
+                <label className="custom-field">
+                    <input type="text" name="description" id="description" onChange={handleChange('description')} value={description} autoFocus required />
+                    <span className="placeholder">Category Description</span>
+                </label>
+                <button onClick={clickSubmit} className="button-add-category" type="submit">Add Category</button>
+            </div>
         )
     }
 
-    const showSuccess = () => {
-        if (success) {
-            return <h3 className="text-success">{name} is created</h3>;
-        }
-    }
+    // const showSuccess = () => {
+    //     <div className="alert alert-success" style={{ display: success ? "" : "none" }}>
+    //         Category created
+    //     </div>
+    // }
 
-    const showError = () => {
-        if (error) {
-            return <h3 className="text-danger">{name} is should be unique</h3>;
-        }
-    }
+    // const showError = () => {
+
+    //     <div
+    //         className="alert alert-danger"
+    //         style={{ display: error ? "" : "none" }}
+    //     >
+    //         {error}
+    //     </div>
+
+    // }
 
     const goBack = () => {
         return (
@@ -82,17 +91,16 @@ const AddCategory = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 offset-md-2">
-                            {showSuccess()}
-                            {showError()}
+                            {/* {showSuccess()}
+                            {showError()} */}
                             {addCategoryForm()}
                             {goBack()}
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }
 
-export default AddCategory; 
+export default AddCategory;

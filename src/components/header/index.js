@@ -40,7 +40,7 @@ const Header = () => {
                     <li className="navigation--item">
                         <Link to="/" className="navigation--links" onClick={closeMobileMenu}>
                             Hone
-            </Link>
+                        </Link>
                     </li>
                     <li className="navigation--item">
                         <Link to="/khuyenmai" className="navigation--links" onClick={closeMobileMenu}>
@@ -64,10 +64,32 @@ const Header = () => {
                         </Link>
                     </li>
                 </ul>
-                {/* <Button /> */}
-                <Link to='/signin'>
-                    <button className="button-signin">Sign In</button>
-                </Link>
+                {!isAuthenticate() && (
+                    <Fragment>
+                        <Link to='/login'>
+                            <button className="button-signin">Login</button>
+                        </Link>
+                    </Fragment>
+                )}
+                {isAuthenticate() && (
+                    <Fragment>
+                        {/* <Link to='/'>
+                            <button className="button-profile" onClick={() => {
+                                logout(() => {
+                                    console.log("logout successful")
+                                })
+                            }}>Profile</button>
+                        </Link> */}
+                        <Link to='/'>
+                            <button className="button-signin" onClick={() => {
+                                logout(() => {
+                                    console.log("logout successful")
+                                })
+                            }}>Logout</button>
+                        </Link>
+                    </Fragment>
+                )}
+
             </nav>
         </>
     )
