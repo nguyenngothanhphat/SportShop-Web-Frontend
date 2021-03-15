@@ -5,6 +5,7 @@ export const getCategories = () => {
         method: 'GET'
     })
         .then(res => {
+        console.log("🚀 ~ file: category-apis.js ~ line 8 ~ getCategories ~ res", res)
             return res.json();
         })
         .catch(err => console.log(err))

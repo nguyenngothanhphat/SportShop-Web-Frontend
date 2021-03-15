@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../../util/api/product-apis';
 import Card from '../../core/Card/card';
+import Search from '../../core/Search/search';
 
 const ListProduct = () => {
     const [productsBySell, setProductsBySell] = useState([]);
@@ -35,6 +36,7 @@ const ListProduct = () => {
 
     return (
         <div className="container-fluid">
+            <Search />
             <h2 className="mb-4">Best Sellers</h2>
             <div className="row">
                 {productsBySell.products && productsBySell.products.map((product, index) => (

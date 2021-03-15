@@ -1,4 +1,5 @@
 import { API } from '../../config';
+import queryString from 'query-string'
 
 export const getProducts = (sortBy) => {
     return fetch(`${API}/admin/products?sortBy=${sortBy}&order=desc&limit=6`, {
@@ -9,6 +10,20 @@ export const getProducts = (sortBy) => {
         })
         .catch(err => {
             console.log("🚀 ~ file: product-apis.js ~ line 11 ~ getProducts ~ err", err)
+        })
+}
+
+export const searchProduct = params => {
+    const query = queryString.stringify(params)
+    console.log("🚀 ~ file: product-apis.js ~ line 18 ~ query", query)
+    return fetch(`${API}/products?${query}`, {
+        method: "GET"
+    })
+        .then(res => {
+            return res.json();
+        })
+        .catch(err => {
+            console.log("🚀 ~ file: product-apis.js ~ line 24 ~ err", err)
         })
 }
 

@@ -12,6 +12,7 @@ const Filter = () => {
 
     const init = () => {
         getCategories().then(data => {
+            console.log("🚀 ~ file: filter.js ~ line 15 ~ getCategories ~ data", data)
             if (data.error) {
                 setError(data.error)
             } else {
@@ -22,7 +23,7 @@ const Filter = () => {
 
     useEffect(() => {
         init();
-    }, [])
+    }, []);
     return (
         <div>
             <Header />
