@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "../core/Card/card";
 import CheckBox from "../core/checkBox/checkBox";
-import RadioBox from '../core/radioBox/radioBox';
-import {prices} from '../core/fixedPrices/fixedPrices'
+import RadioBox from "../core/radioBox/radioBox";
+import { prices } from "../core/fixedPrices/fixedPrices";
 
 import { getCategories } from "../../util/api/category-apis";
 
@@ -37,8 +37,30 @@ const Filter = () => {
     // console.log("SHOP: ", filters, filterBy);
     const newFilters = { ...myFilters };
     newFilters.filters[filterBy] = filters;
+
+    if (filterBy == "price") {
+      let priceValues = handlePrice(filters);
+      newFilters.filters[filterBy] = priceValues;
+    }
+    loadFilteredResults(myFilters.filters);
     setMyFilters(newFilters);
-   };
+  };
+
+  const handlePrice = (value) => {
+    const data = prices;
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === parseInt(value)) {
+        array = data[key].array;
+      }
+    }
+    return array;
+  };
+
+  const loadFilteredResults = (newFilters) => {
+    console.log("🚀 ~ file: filter.js ~ line 62 ~ constloadFilteredResults ~ newFilters", newFilters) 
+  }
 
   return (
     <div>
@@ -64,9 +86,7 @@ const Filter = () => {
               />
             </ul>
           </div>
-          <div className="col-8">
-              {JSON.stringify(myFilters)}
-          </div>
+          <div className="col-8">{JSON.stringify(myFilters)}</div>
         </div>
       </div>
     </div>
