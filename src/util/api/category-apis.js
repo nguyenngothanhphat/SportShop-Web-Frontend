@@ -1,3 +1,4 @@
+import axios from "axios";
 import { API } from "../../config";
 
 export const getCategories = () => {
@@ -44,4 +45,40 @@ export const updateCategory = (categoryId, userId, token, category) => {
             return res.json();
         })
         .catch(err => console.log("🚀 ~ file: category-apis.js ~ line 37 ~ updateCategory ~ err", err));
+}
+
+export const getSubs = async () => {
+    await axios.get(`${API}/admin/subs`);
+}
+
+export const getSub = async (slug) => {
+    await axios.get(`${API}/admin/sub/${slug}`);
+}
+
+// export const createSub = async (sub, token) => {
+//     await axios.post(`${API}/admin/sub`, sub, {
+//         header: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     })
+// }
+
+export const createSub = (sub, token) => {
+console.log("🚀 ~ file: category-apis.js ~ line 67 ~ createSub ~ sub", sub)
+    return fetch(`${API}/admin/sub`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(sub)
+    })
+    .then(res => {
+        console.log("🚀 ~ file: category-apis.js ~ line 15 ~ createCategory ~ res", res);
+        return res.json();
+    })
+    .catch(err => {
+        console.log("🚀 ~ file: category-apis.js ~ line 19 ~ createCategory ~ err", err);
+    })
 }

@@ -11,6 +11,7 @@ import AdminRoute from './components/auth/AdminRoute';
 import UserDashboard from './components/auth/userDashboard';
 import AdminDashboard from './components/auth/AdminDashboard';
 import AddCategory from './components/admin/category/addCategory';
+import AddSubCategory from './components/admin/category/addSubCategory'
 import AddProduct from './components/admin/product/addProduct';
 import Filter from './components/filter/filter';
 import './styles.css'
@@ -29,6 +30,7 @@ const Routes = () => {
                 <PrivateRoute path="/account" exact component={UserDashboard} />
                 <AdminRoute path="/dashboard" exact component={AdminDashboard} />
                 <AdminRoute path="/create/category" exact component={AddCategory} />
+                <AdminRoute path="/create/sub/category" exact component={AddSubCategory} />
                 <AdminRoute path="/create/product" exact component={AddProduct} />
             </Switch>
         </BrowserRouter>
