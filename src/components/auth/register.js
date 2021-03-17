@@ -1,179 +1,53 @@
 import React, { useState } from "react";
-import {register} from '../../util/api/auth-apis'
-
-import Header from '../header/index';
-import Footer from '../footer/index';
+import { auth } from "../../config/firebase";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    address: "",
-    phoneNumber: "",
-    error: "",
-    success: false,
-  });
+  const [email, setEmail] = useState("");
 
-  const { email, password, firstName, lastName, address, phoneNumber, success, error} = values;
-  console.log("🚀 ~ file: register.js ~ line 17 ~ Register ~ success", success)
-  console.log("🚀 ~ file: register.js ~ line 17 ~ Register ~ error", error)
-
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, error: false, [name]: event.target.value });
-  };
-
-  const clickSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setValues({ ...values, error: false });
-    register({ email, password, firstName, lastName, address, phoneNumber }).then(
-      (data) => {
-      console.log("🚀 ~ file: register.js ~ line 45 ~ clickSubmit ~ data", data.message)
-        if (data.message) {
-          setValues({ ...values, error: data.message, success: false });
-        } else {
-          setValues({
-            ...values,
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            address: "",
-            phoneNumber: "",
-            error: "",
-            success: true,
-          });
-        }
-      }
+    const config = {
+      url: "http://localhost:4040/register/complete",
+      handleCodeInApp: true,
+    };
+
+    await auth.sendSignInLinkToEmail(email, config);
+    toast.success(
+      `Email is sent to ${email}. Click the link to complete your registration.`
     );
+    // save user email in local storage
+    window.localStorage.setItem("emailForRegistration", email);
+    // clear state
+    setEmail("");
   };
 
-  const showError = () => (
-    <div
-      className="alert alert-danger"
-      style={{ display: error ? "" : "none" }}
-    >
-      {error}
-    </div>
+  const registerForm = () => (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        className="form-control"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoFocus
+      />
+
+      <button type="submit" className="btn btn-raised">
+        Register
+      </button>
+    </form>
   );
 
-  const showSuccess = () => (
-    <div className="alert alert-success" style={{ display: success ? "" : "none" }}>
-      New account is created. Please login.
-    </div>
-  )
   return (
-    <div>
-      <Header />
-      <div className="banner-top">
-        <div className="container">
-          <h3>Register</h3>
-          <h4>
-            <a href="/">Home</a>
-            <label>/</label>Register
-          </h4>
-          <div className="clearfix"> </div>
+    <div className="container p-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <h4>Register</h4>
+          <ToastContainer />
+          {registerForm()}
         </div>
       </div>
-      {/* Login */}
-      <div className="login">
-        <div className="main-agileits">
-          <div className="form-w3agile form1">
-            <h3>Register</h3>
-            {showSuccess()}
-            {showError()}
-            <form>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="Email"
-                  name="Email"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'Email';}"
-                  onChange={handleChange("email")}
-                  value={email}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-lock" aria-hidden="true" />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="Password"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'Password';}"
-                  onChange={handleChange("password")}
-                  value={password}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  name="First Name"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'firstName';}"
-                  onChange={handleChange("firstName")}
-                  value={firstName}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  name="Last Name"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'lastName';}"
-                  onChange={handleChange("lastName")}
-                  value={lastName}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="Address"
-                  name="Address"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'Address';}"
-                  onChange={handleChange("address")}
-                  value={address}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <div className="key">
-                <i className="fa fa-envelope" aria-hidden="true" />
-                <input
-                  type="text"
-                  placeholder="Phone"
-                  name="Number"
-                  //   onfocus="this.value = '';"
-                  //   onblur="if (this.value == '') {this.value = 'Number';}"
-                  onChange={handleChange("phoneNumber")}
-                  value={phoneNumber}
-                  required
-                />
-                <div className="clearfix" />
-              </div>
-              <input onClick={clickSubmit} type="submit" placeholder="Submit" />
-            </form>
-          </div>
-        </div>
-      </div>
-      <Footer />
     </div>
   );
 };
