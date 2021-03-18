@@ -1,7 +1,8 @@
-import * as firebase from 'firebase';
+import firebase from "firebase/app";
+import "firebase/auth";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyDjI3DmOmhPRlxM95utOTc8_LRMpvHY3qY",
     authDomain: "sportshop-bf8d0.firebaseapp.com",
     projectId: "sportshop-bf8d0",
@@ -10,7 +11,9 @@ const firebaseConfig = {
     appId: "1:642959755482:web:b5496782095b5a0afa3de3"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  }
 
 /* Export */
 export const auth = firebase.auth();
