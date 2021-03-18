@@ -6,10 +6,13 @@ import { MailOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
+import { createOrUpdateUser } from '../../util/api/auth-apis';
+
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
@@ -26,14 +29,23 @@ const Login = ({ history }) => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       // console.log("🚀 ~ file: login.js ~ line 16 ~ handleSubmit ~ result", result)
       const { user } = result
-      const idTokenResult = await user.getIdTokenResult()
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload: {
-          email: user.email,
-          token: idTokenResult.token,
-        }
-      })
+      const idTokenResult = await user.getIdTokenResult();
+
+      createOrUpdateUser(idTokenResult.token)
+        .then((res) => {
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: {
+              name: res.data.name,
+              email: res.data.email,
+              token: idTokenResult.token,
+              role: res.data.role,
+              _id: res.data._id,
+            },
+          });
+        })
+        .catch();
+
       history.push("/")
     } catch (error) {
       console.log("🚀 ~ file: login.js ~ line 31 ~ handleSubmit ~ error", error);

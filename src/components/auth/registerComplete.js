@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../config/firebase";
 import { toast } from "react-toastify";
 
+import { createOrUpdateUser } from '../../util/api/auth-apis';
+
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +37,22 @@ const RegisterComplete = ({ history }) => {
         const idTokenResult = await user.getIdTokenResult();
         /* Redux store */
         console.log("user", user, "idTokenResult", idTokenResult);
+
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+          })
+          .catch();
+
         /* Redirect */
         history.push("/");
       }
