@@ -9,6 +9,7 @@ import Home from './components/home/home';
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
 import ResgisterComplete from './components/auth/registerComplete'
+import ForgotPassword from './components/auth/forgotPassword'
 import './styles.css'
 
 import { auth } from './config/firebase';
@@ -41,6 +42,7 @@ const Routes = () => {
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/register/complete" exact component={ResgisterComplete} />
+                <Route path="/forgot/password" exact component={ForgotPassword} />
             </Switch>
         </>
     )
