@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../config/firebase";
 import { toast } from "react-toastify";
+import {useDispatch} from 'react-redux';
 
 import { createOrUpdateUser } from '../../util/api/auth-apis';
 
@@ -10,9 +11,11 @@ const RegisterComplete = ({ history }) => {
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
-    console.log(window.location.href);
-    console.log(window.localStorage.getItem("emailForRegistration"))
+    // console.log(window.location.href);
+    // console.log(window.localStorage.getItem("emailForRegistration"))
   }, []);
+
+  let dispatch = useDispatch()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +30,7 @@ const RegisterComplete = ({ history }) => {
     }
     try {
       const result = await auth.signInWithEmailLink(email, window.location.href);
-      console.log("result", result);
+      // console.log("result", result);
       if (result.user.emailVerified) {
         /* Remove user email for local storage */
         window.localStorage.removeItem("emailForRegistration");
@@ -36,7 +39,7 @@ const RegisterComplete = ({ history }) => {
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
         /* Redux store */
-        console.log("user", user, "idTokenResult", idTokenResult);
+        // console.log("user", user, "idTokenResult", idTokenResult);
 
         createOrUpdateUser(idTokenResult.token)
           .then((res) => {

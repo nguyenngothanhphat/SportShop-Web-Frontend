@@ -1,9 +1,9 @@
 import axios from "axios";
-import {API} from '../../config';
+import { API } from "../../config";
 
 export const createOrUpdateUser = async (authtoken) => {
   return await axios.post(
-    `${API}/api/create-or-update-user`,
+    `${API}/create-or-update-user`,
     {},
     {
       headers: {
@@ -12,3 +12,28 @@ export const createOrUpdateUser = async (authtoken) => {
     }
   );
 };
+
+export const currentUser = async (authtoken) => {
+  return await axios.post(
+    `${API}/current-user`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
+
+export const currentAdmin = async (authtoken) => {
+  return await axios.post(
+    `${API}/current-admin`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
+
