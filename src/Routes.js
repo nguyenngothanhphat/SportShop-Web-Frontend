@@ -15,7 +15,9 @@ import ForgotPassword from "./components/auth/forgotPassword";
 import History from './components/user/history';
 import Password from './components/user/password';
 import Wishlist from './components/user/wishlist';
-import Dashboard from './components/admin/dashboard'
+import Dashboard from './components/admin/dashboard/dashboard'
+import CreateCategory from './components/admin/category/createCategory'
+import UpdateCategory from './components/admin/category/updateCategory'
 import "./styles.css";
 
 /* import private */
@@ -72,6 +74,8 @@ const Routes = () => {
         <UserPrivate path="/user/password" exact component={Password} />
         <UserPrivate path="/user/wishlist" exact component={Wishlist} />
         <AdminPrivate path="/admin/dashboard" exact component={Dashboard} />
+        <AdminPrivate path="/admin/category" exact component={CreateCategory} />
+        <AdminPrivate path="/admin/category/:slug" exact component={UpdateCategory} />
       </Switch>
     </>
   );
