@@ -35,6 +35,12 @@ const Navigation = () => (
       </li>
 
       <li className="nav-item">
+        <Link to="/admin/brand/category" className="nav-link">
+          Brands
+        </Link>
+      </li>
+
+      <li className="nav-item">
         <Link to="/admin/coupon" className="nav-link">
           Coupon
         </Link>

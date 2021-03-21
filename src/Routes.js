@@ -17,7 +17,14 @@ import Password from './components/user/password';
 import Wishlist from './components/user/wishlist';
 import Dashboard from './components/admin/dashboard/dashboard'
 import CreateCategory from './components/admin/category/createCategory'
-import UpdateCategory from './components/admin/category/updateCategory'
+import UpdateCategory from './components/admin/category/updateCategory';
+import CreateBrand from './components/admin/brand/createBrand';
+import UpdateBrand from './components/admin/brand/updateBrand';
+import CreateSubCategory from './components/admin/subCategory/createSubCategory';
+import UpdateSubCategory from './components/admin/subCategory/updateSubCategory';
+import CreateProduct from './components/admin/product/createProduct';
+import AllProducts from './components/admin/product/products';
+import UpdateProduct from './components/admin/product/updateProduct';
 import "./styles.css";
 
 /* import private */
@@ -60,6 +67,7 @@ const Routes = () => {
     });
     return () => unsubcribe();
   }, [dispatch]);
+
   return (
     <>
       <Header />
@@ -76,6 +84,13 @@ const Routes = () => {
         <AdminPrivate path="/admin/dashboard" exact component={Dashboard} />
         <AdminPrivate path="/admin/category" exact component={CreateCategory} />
         <AdminPrivate path="/admin/category/:slug" exact component={UpdateCategory} />
+        <AdminPrivate path="/admin/sub/category" exact component={CreateSubCategory} />
+        <AdminPrivate path="/admin/sub/:slug" exact component={UpdateSubCategory} />
+        <AdminPrivate path="/admin/brand/category" exact component={CreateBrand} />
+        <AdminPrivate path="/admin/brand/:slug" exact component={UpdateBrand} />
+        <AdminPrivate path="/admin/product" exact component={CreateProduct} />
+        <AdminPrivate path="/admin/product/:slug" exact component={UpdateProduct} />
+        <AdminPrivate path="/admin/products" exact component={AllProducts} />
       </Switch>
     </>
   );

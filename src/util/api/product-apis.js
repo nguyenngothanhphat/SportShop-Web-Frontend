@@ -1,0 +1,32 @@
+import axios from "axios";
+import { API } from '../../config';
+
+export const createProduct = async (product, authtoken) =>
+  await axios.post(`${API}/product`, product, {
+    headers: {
+      authtoken,
+    },
+  });
+
+export const getProductsByCount = async (count) => {
+  return await axios.get(`${API}/products/${count}`);
+}
+
+export const removeProduct = async (slug, authtoken) => {
+  return await axios.delete(`${API}/product/${slug}`, {
+    headers: {
+      authtoken,
+    }
+  })
+}
+
+export const getProduct = async (slug) => {
+  return await axios.get(`${API}/product/${slug}`)
+}
+
+export const updateProduct = async (slug, product, authtoken) =>
+  await axios.put(`${API}/product/${slug}`, product, {
+    headers: {
+      authtoken,
+    },
+  });
