@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
+import Resizer from 'react-image-file-resizer';
+import axios from 'axios'
+import { Select, Avatar, Badge } from "antd";
 import Navigation from "../nav/navigation";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getProduct, updateProduct } from "../../../util/api/product-apis";
 import { getCategories, getCategorySubs } from "../../../util/api/category-apis";
+import { getBrands } from '../../../util/api/brand-apis';
 import { LoadingOutlined } from "@ant-design/icons";
+
+import { API } from '../../../config'
+
+const { Option } = Select
 
 const initialState = {
     title: "",
@@ -26,9 +34,11 @@ const UpdateProduct = ({ match, history }) => {
     // state
     const [values, setValues] = useState(initialState);
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [subOptions, setSubOptions] = useState([]);
     const [arrayOfSubs, setArrayOfSubs] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedBrand, setSelectedBrand] = useState("");
     const [loading, setLoading] = useState(false);
 
     const {
@@ -54,6 +64,7 @@ const UpdateProduct = ({ match, history }) => {
     useEffect(() => {
         loadProduct();
         loadCategories();
+        loadBrand();
     }, []);
 
     const loadProduct = () => {
@@ -81,6 +92,10 @@ const UpdateProduct = ({ match, history }) => {
             setCategories(c.data);
         });
 
+    const loadBrand = () => {
+        getBrands().then(data => setBrands(data.data));
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
@@ -103,7 +118,6 @@ const UpdateProduct = ({ match, history }) => {
 
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
-        // console.log(e.target.name, " ----- ", e.target.value);
     };
 
     const handleCategoryChange = (e) => {
@@ -111,7 +125,7 @@ const UpdateProduct = ({ match, history }) => {
         console.log("CLICKED CATEGORY", e.target.value);
         setValues({ ...values, subs: [] });
 
-        setSelectedCategory(e.target.value);
+        setSelectedBrand(e.target.value);
 
         getCategorySubs(e.target.value).then((res) => {
             console.log("SUB OPTIONS ON CATGORY CLICK", res);
@@ -120,14 +134,30 @@ const UpdateProduct = ({ match, history }) => {
 
         console.log("EXISTING CATEGORY values.category", values.category);
 
-        // if user clicks back to the original category
-        // show its sub categories in default
         if (values.category._id === e.target.value) {
             loadProduct();
         }
-        // clear old sub category ids
         setArrayOfSubs([]);
     };
+
+    // const handleBrandChange = (e) => {
+    //     e.preventDefault();
+    //     setValues({ ...values, subs: [] });
+
+    //     setSelectedCategory(e.target.value);
+
+    //     getCategorySubs(e.target.value).then((res) => {
+    //         console.log("SUB OPTIONS ON CATGORY CLICK", res);
+    //         setSubOptions(res.data);
+    //     });
+
+    //     console.log("EXISTING CATEGORY values.category", values.category);
+
+    //     if (values.category._id === e.target.value) {
+    //         loadProduct();
+    //     }
+    //     setArrayOfSubs([]);
+    // }
 
     const fileUploadAndResize = (e) => {
         let files = e.target.files;
@@ -322,6 +352,7 @@ const UpdateProduct = ({ match, history }) => {
                             <label>Flavour</label>
                             <select
                                 name="color"
+                                value={color}
                                 className="form-control"
                                 onChange={handleChange}
                             >
@@ -340,6 +371,7 @@ const UpdateProduct = ({ match, history }) => {
                                 name="brand"
                                 className="form-control"
                                 onChange={handleChange}
+                                value={selectedBrand ? selectedBrand : brand._id}
                             >
                                 <option>Please select</option>
                                 {brands.length > 0 && brands.map((brand, index) => (

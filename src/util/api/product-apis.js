@@ -30,3 +30,15 @@ export const updateProduct = async (slug, product, authtoken) =>
       authtoken,
     },
   });
+
+export const getProducts = async (sort, order, page) => {
+  return await axios.post(`${API}/products`, {
+    sort,
+    order,
+    page,
+  })
+}
+
+export const getProductsCount = async () => {
+  return await axios.get(`${API}/products/total`)
+}

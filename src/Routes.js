@@ -25,6 +25,7 @@ import UpdateSubCategory from './components/admin/subCategory/updateSubCategory'
 import CreateProduct from './components/admin/product/createProduct';
 import AllProducts from './components/admin/product/products';
 import UpdateProduct from './components/admin/product/updateProduct';
+import DetailProduct from './components/product/detail';
 import "./styles.css";
 
 /* import private */
@@ -91,6 +92,7 @@ const Routes = () => {
         <AdminPrivate path="/admin/product" exact component={CreateProduct} />
         <AdminPrivate path="/admin/product/:slug" exact component={UpdateProduct} />
         <AdminPrivate path="/admin/products" exact component={AllProducts} />
+        <Route path="/product/:slug" component={DetailProduct} />
       </Switch>
     </>
   );

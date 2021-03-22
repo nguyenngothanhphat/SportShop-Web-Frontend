@@ -403,3 +403,8 @@ input[type="submit"]:hover {
         background-position: 0% 50%;
     }
 }
+
+.slider img {
+    height: 450px;
+    object-fit: cover;
+}
