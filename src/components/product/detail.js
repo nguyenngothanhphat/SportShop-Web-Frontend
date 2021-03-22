@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { getProduct, getProductsCount } from '../../util/api/product-apis';
+import { getProduct, getProductsCount, productStar } from '../../util/api/product-apis';
 import StarRating from 'react-star-ratings'
 import RatingModal from '../modal/rating'
 
@@ -13,10 +14,13 @@ const { TabPane } = Tabs;
 
 const DetailProduct = ({ match }) => {
     const [product, setProduct] = useState({});
+    const [star, setStar] = useState(0);
 
     const { _id, title, description, images, category, price, subs, shipping, color, brand, quantity, sold } = product;
 
     const { slug } = match.params;
+
+    const { user } = useSelector((state) => ({ ...state }))
 
     useEffect(() => {
         loadSingleProduct();
@@ -24,6 +28,14 @@ const DetailProduct = ({ match }) => {
 
     const loadSingleProduct = () => {
         getProduct(slug).then(res => setProduct(res.data));
+    }
+
+    const onStarClick = (newRating, name) => {
+        setStar(newRating);
+        productStar(name, star, user.token).then(res => {
+            console.log("🚀 ~ file: detail.js ~ line 36 ~ productStar ~ res", res.data)
+            loadSingleProduct();
+        })
     }
 
     return (
@@ -57,9 +69,12 @@ const DetailProduct = ({ match }) => {
                             <HeartOutlined className="text-info" /><br /> Add to Wishlist
                         </Link>,
                         <RatingModal>
-                            <StarRating name={_id} numberOfStars={5} rating={2} changeRating={(newRating, name) => {
-                                console.log("newRating", newRating, "name", name)
-                            }}
+                            <StarRating
+                                name={_id}
+                                numberOfStars={5}
+                                rating={2}
+                                changeRating={onStarClick}
+                                star={star}
                                 isSelectable={true}
                                 starRatedColor="yellow"
                             />
