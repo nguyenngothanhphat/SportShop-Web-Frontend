@@ -14,6 +14,8 @@ import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import Search from '../search/search';
+
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
@@ -42,6 +44,10 @@ const Header = () => {
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Item key="home" icon={<AppstoreOutlined />}>
         <Link to="/">Home</Link>
+      </Item>
+
+      <Item key="filter" icon={<AppstoreOutlined />}>
+        <Link to="/filter/product">Filter</Link>
       </Item>
 
       {!user && (
@@ -79,6 +85,9 @@ const Header = () => {
           </Item>
         </SubMenu>
       )}
+      <span className="float-right p-1">
+            <Search />
+      </span>
     </Menu>
   );
 };

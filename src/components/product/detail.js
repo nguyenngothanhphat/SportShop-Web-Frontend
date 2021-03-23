@@ -59,7 +59,7 @@ const DetailProduct = ({ match }) => {
     return (
         <div className="container-fluid">
             <div className="row pt-4">
-                <div className="col-md-7">
+                <div className="col-md-5">
                     <Carousel showArrows={true} autoPlay infiniteLoop>
                         {images && images.map((image) => {
                             return (
@@ -76,8 +76,8 @@ const DetailProduct = ({ match }) => {
                         </TabPane>
                     </Tabs>
                 </div>
-                <div className="col-md-5">
-                    <h1 className="bg-info p-3">{title}</h1>
+                <div className="col-md-7">
+                    <h3>{title}</h3>
                     {product && product.ratings && product.ratings.length > 0 ? ShowAverageRating(product) : <div className="text-center pt-1 pb-3">No rating yet</div>}
                     <Card actions={[
                         <>
@@ -94,7 +94,10 @@ const DetailProduct = ({ match }) => {
                                 rating={star}
                                 changeRating={onStarClick}
                                 isSelectable={true}
-                                starRatedColor="yellow"
+                                starRatedColor="blue"
+                                starHoverColor="blue"
+                                starDimension="40px"
+                                starSpacing="15px"
                             />
                         </RatingModal>
                     ]}>

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 /* Import Component */
 import Header from "./components/nav/header";
+// import Footer from "./components/nav/footer";
 import Home from "./components/home/home";
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
@@ -28,6 +29,7 @@ import UpdateProduct from './components/admin/product/updateProduct';
 import DetailProduct from './components/product/detail';
 import CategoryHome from './components/category/detailCategory';
 import SubCategoryHome from './components/category/detailSubCategory';
+import Filter from './components/filter/filter';
 import "./styles.css";
 
 /* import private */
@@ -97,7 +99,9 @@ const Routes = () => {
         <Route path="/product/:slug" component={DetailProduct} />
         <Route path="/category/:slug" component={CategoryHome} />
         <Route path="/sub/:slug" component={SubCategoryHome} />
+        <Route path="/filter/product" component={Filter} />
       </Switch>
+      {/* <Footer /> */}
     </>
   );
 };
