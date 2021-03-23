@@ -44,9 +44,13 @@ export const getProductsCount = async () => {
 }
 
 export const productStar = async (productId, star, authtoken) => {
-  return axios.put(`${API}/product/star/${productId}`, {star}, {
+  return axios.put(`${API}/product/star/${productId}`, { star }, {
     headers: {
       authtoken
     }
   })
+}
+
+export const getRelated = async (productId) => {
+  return await axios.get(`${API}/product/related/${productId}`);
 }

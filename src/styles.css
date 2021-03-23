@@ -357,7 +357,7 @@ input[type="submit"]:hover {
     min-height: 100px;
 }
 
-.jumbotron {
+/* .jumbotron {
     width: 30wh;
     height: 30vh;
     color: #fff;
@@ -366,7 +366,7 @@ input[type="submit"]:hover {
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
     animation: Gradient 15s ease infinite;
-}
+} */
 
 @-webkit-keyframes Gradient {
     0% {

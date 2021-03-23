@@ -5,15 +5,18 @@ import { useSelector } from 'react-redux';
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { getProduct, getProductsCount, productStar } from '../../util/api/product-apis';
+import { getProduct, getProductsCount, productStar, getRelated } from '../../util/api/product-apis';
 import StarRating from 'react-star-ratings'
 import RatingModal from '../modal/rating'
+import ShowAverageRating from './showAverageRating';
+import CardProduct from '../card/cardProduct';
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
 
 const DetailProduct = ({ match }) => {
     const [product, setProduct] = useState({});
+    const [related, setRelated] = useState([]);
     const [star, setStar] = useState(0);
 
     const { _id, title, description, images, category, price, subs, shipping, color, brand, quantity, sold, ratings } = product;
@@ -36,12 +39,17 @@ const DetailProduct = ({ match }) => {
     })
 
     const loadSingleProduct = () => {
-        getProduct(slug).then(res => setProduct(res.data));
+        getProduct(slug).then(res => {
+            setProduct(res.data);
+
+            /* Load related */
+            getRelated(res.data._id).then(res => setRelated(res.data))
+        }
+        );
     }
 
     const onStarClick = (newRating, name) => {
         setStar(newRating);
-        console.log("mmmm", star);
         productStar(name, newRating, user.token).then(res => {
             console.log("🚀 ~ file: detail.js ~ line 36 ~ productStar ~ res", res.data)
             loadSingleProduct();
@@ -70,6 +78,7 @@ const DetailProduct = ({ match }) => {
                 </div>
                 <div className="col-md-5">
                     <h1 className="bg-info p-3">{title}</h1>
+                    {product && product.ratings && product.ratings.length > 0 ? ShowAverageRating(product) : <div className="text-center pt-1 pb-3">No rating yet</div>}
                     <Card actions={[
                         <>
                             <ShoppingCartOutlined className="text-success" /> <br />
@@ -157,6 +166,19 @@ const DetailProduct = ({ match }) => {
                     <hr />
                     <h4>Relate products</h4>
                     <hr />
+                    <div className="row pb-5">
+                        {related.length > 0 ? related.map((relate, index) => {
+                            return (
+                                <div key={index} className="col-md-4">
+                                    <CardProduct product={relate} />
+                                </div>
+                            )
+                        }) : (
+                            <div className="text-center col">
+                                No Products Found
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
