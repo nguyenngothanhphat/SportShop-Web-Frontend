@@ -16,7 +16,7 @@ const DetailProduct = ({ match }) => {
     const [product, setProduct] = useState({});
     const [star, setStar] = useState(0);
 
-    const { _id, title, description, images, category, price, subs, shipping, color, brand, quantity, sold } = product;
+    const { _id, title, description, images, category, price, subs, shipping, color, brand, quantity, sold, ratings } = product;
 
     const { slug } = match.params;
 
@@ -26,13 +26,23 @@ const DetailProduct = ({ match }) => {
         loadSingleProduct();
     }, [slug]);
 
+    useEffect(() => {
+        if (product.ratings && user) {
+            let exsitingRatingObject = product.ratings.find(
+                (el) => el.postedBy.toString() === user._id.toString()
+            )
+            exsitingRatingObject && setStar(exsitingRatingObject.star)
+        }
+    })
+
     const loadSingleProduct = () => {
         getProduct(slug).then(res => setProduct(res.data));
     }
 
     const onStarClick = (newRating, name) => {
         setStar(newRating);
-        productStar(name, star, user.token).then(res => {
+        console.log("mmmm", star);
+        productStar(name, newRating, user.token).then(res => {
             console.log("🚀 ~ file: detail.js ~ line 36 ~ productStar ~ res", res.data)
             loadSingleProduct();
         })
@@ -72,9 +82,8 @@ const DetailProduct = ({ match }) => {
                             <StarRating
                                 name={_id}
                                 numberOfStars={5}
-                                rating={2}
+                                rating={star}
                                 changeRating={onStarClick}
-                                star={star}
                                 isSelectable={true}
                                 starRatedColor="yellow"
                             />
