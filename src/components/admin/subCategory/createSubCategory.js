@@ -7,6 +7,8 @@ import { createSub, getSubs, removeSub } from "../../../util/api/sub-apis";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
+import HeaderAdmin from '../header/headerAdmin'
+
 const CreateSubCategory = () => {
     const { user } = useSelector((state) => ({ ...state }));
 
@@ -83,9 +85,11 @@ const CreateSubCategory = () => {
     );
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 p-0">
                     <Navigation />
                 </div>
                 <div className="col">
@@ -124,6 +128,7 @@ const CreateSubCategory = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

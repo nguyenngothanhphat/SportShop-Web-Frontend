@@ -1,12 +1,15 @@
 import React from "react";
 
 import Navigation from '../nav/navigation';
+import HeaderAdmin from '../header/headerAdmin'
 
 const Dashboard = () => {
   return (
+    <>
+    <HeaderAdmin />
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-2 pl-0">
           <Navigation />
         </div>
 
@@ -15,6 +18,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

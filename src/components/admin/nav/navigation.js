@@ -1,58 +1,78 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Layout, Menu } from "antd";
+import SubMenu from "antd/lib/menu/SubMenu";
+import {
+  ShoppingCartOutlined,
+  OrderedListOutlined,
+  BlockOutlined,
+  KeyOutlined,
+} from "@ant-design/icons";
+
+const { Sider } = Layout;
 
 const Navigation = () => (
-  <nav>
-    <ul className="nav flex-column">
-      <li className="nav-item">
-        <Link to="/admin/dashboard" className="nav-link">
-          Dashboard
-        </Link>
-      </li>
+  <Layout>
+    <Sider>
+      <Menu defaultSelectedKeys={["Dashboard"]} mode="inline">
+        <Menu.Item key="Dashboard">
+          <Link to="/admin/dashboard">Dashboard</Link>
+        </Menu.Item>
+        <SubMenu
+          title={
+            <span>
+              <ShoppingCartOutlined />
+              <span>Products</span>
+            </span>
+          }
+        >
+          <Menu.ItemGroup key="Product" title="Detail">
+            <Menu.Item key="addProduct">
+              <Link to="/admin/product">Add Product</Link>
+            </Menu.Item>
+            <Menu.Item key="viewProducts">
+              <Link to="/admin/products">View All Products</Link>
+            </Menu.Item>
+          </Menu.ItemGroup>
+        </SubMenu>
 
-      <li className="nav-item">
-        <Link to="/admin/product" className="nav-link">
-          Product
-        </Link>
-      </li>
+        <Menu.Item key="Category">
+          <Link to="/admin/category">
+            <OrderedListOutlined />
+            Category
+          </Link>
+        </Menu.Item>
 
-      <li className="nav-item">
-        <Link to="/admin/products" className="nav-link">
-          Products
-        </Link>
-      </li>
+        <Menu.Item key="SubCategory">
+          <Link to="/admin/sub/category">
+            <BlockOutlined />
+            Sub Category
+          </Link>
+        </Menu.Item>
 
-      <li className="nav-item">
-        <Link to="/admin/category" className="nav-link">
-          Category
-        </Link>
-      </li>
+        <Menu.Item key="Brand">
+          <Link to="/admin/brand/category">
+            <KeyOutlined />
+            Brand
+          </Link>
+        </Menu.Item>
 
-      <li className="nav-item">
-        <Link to="/admin/sub/category" className="nav-link">
-          Sub Category
-        </Link>
-      </li>
+        <Menu.Item key="Coupon">
+          <Link to="/admin/coupon">
+            <KeyOutlined />
+            Coupon
+          </Link>
+        </Menu.Item>
 
-      <li className="nav-item">
-        <Link to="/admin/brand/category" className="nav-link">
-          Brands
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/admin/coupon" className="nav-link">
-          Coupon
-        </Link>
-      </li>
-
-      <li className="nav-item">
-        <Link to="/user/password" className="nav-link">
-          Password
-        </Link>
-      </li>
-    </ul>
-  </nav>
+        <Menu.Item key="Password">
+          <Link to="/user/password">
+            <KeyOutlined />
+            Password
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </Sider>
+  </Layout>
 );
 
 export default Navigation;

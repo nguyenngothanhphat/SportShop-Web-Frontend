@@ -3,6 +3,7 @@ import Navigation from "../nav/navigation";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategory, updateCategory } from "../../../util/api/category-apis";
+import HeaderAdmin from '../header/headerAdmin'
 
 const UpdateCategory = ({ history, match }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -55,9 +56,11 @@ const UpdateCategory = ({ history, match }) => {
   );
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-2 pl-0">
           <Navigation />
         </div>
         <div className="col">
@@ -71,6 +74,7 @@ const UpdateCategory = ({ history, match }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

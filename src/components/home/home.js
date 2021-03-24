@@ -4,6 +4,7 @@ import { getProducts, getProductsCount } from '../../util/api/product-apis';
 import CardProduct from '../card/cardProduct'
 import CategoryList from '../category/index';
 import SubCategoryList from '../category/subCategoryList';
+import Header from '../nav/header'
 
 const Home = () => {
     const [productsArrivals, setProductsArrivals] = useState([]);
@@ -62,6 +63,7 @@ const Home = () => {
 
     return (
         <>
+            <Header />
             <div className="jumbotron">
                 {loading ? <h4 className="text-center p-3 mt-5 mb-5 display-3">Loading ...</h4> : <h4 className="text-center p-3 mt-5 mb-5 display-3">All Products</h4>}
             </div>

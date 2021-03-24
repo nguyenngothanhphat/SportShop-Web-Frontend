@@ -3,6 +3,8 @@ import { auth } from "../../config/firebase";
 import { toast } from "react-toastify";
 import { useSelector } from 'react-redux';
 
+import Header from '../nav/header'
+
 const ForgotPassword = ({ history }) => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
@@ -36,6 +38,8 @@ const ForgotPassword = ({ history }) => {
     };
 
     return (
+        <>
+        <Header />
         <div className="container col-md-6 offset-md-3 p-5">
             {loading ? (
                 <h4 className="text-danger">Loading</h4>
@@ -58,6 +62,7 @@ const ForgotPassword = ({ history }) => {
           </button>
             </form>
         </div>
+        </>
     );
 };
 

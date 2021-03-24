@@ -5,6 +5,8 @@ import {useDispatch} from 'react-redux';
 
 import { createOrUpdateUser } from '../../util/api/auth-apis';
 
+import Header from '../nav/header'
+
 const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -85,6 +87,8 @@ const RegisterComplete = ({ history }) => {
   );
 
   return (
+    <>
+    <Header />
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -93,6 +97,7 @@ const RegisterComplete = ({ history }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

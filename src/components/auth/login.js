@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 
 import { createOrUpdateUser } from '../../util/api/auth-apis';
 
+import Header from '../nav/header'
+
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -113,6 +115,8 @@ const Login = ({ history }) => {
   );
 
   return (
+    <>
+    <Header />
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -126,6 +130,7 @@ const Login = ({ history }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

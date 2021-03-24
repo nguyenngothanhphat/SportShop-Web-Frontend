@@ -7,6 +7,8 @@ import { getProductsByCount, removeProduct } from '../../../util/api/product-api
 import { toast } from "react-toastify";
 import { useSelector } from 'react-redux';
 
+import HeaderAdmin from '../header/headerAdmin'
+
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -48,9 +50,11 @@ const Products = () => {
     }
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 pl-0">
                     <Navigation />
                 </div>
 
@@ -74,6 +78,7 @@ const Products = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

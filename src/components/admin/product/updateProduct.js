@@ -10,6 +10,8 @@ import { getCategories, getCategorySubs } from "../../../util/api/category-apis"
 import { getBrands } from '../../../util/api/brand-apis';
 import { LoadingOutlined } from "@ant-design/icons";
 
+import HeaderAdmin from '../header/headerAdmin'
+
 import { API } from '../../../config'
 
 const { Option } = Select
@@ -218,9 +220,11 @@ const UpdateProduct = ({ match, history }) => {
     }
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 pl-0">
                     <Navigation />
                 </div>
 
@@ -388,6 +392,7 @@ const UpdateProduct = ({ match, history }) => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

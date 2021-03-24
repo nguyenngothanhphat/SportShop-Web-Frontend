@@ -6,6 +6,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { createCategory, getCategories, removeCategory } from '../../../util/api/category-apis';
 import Navigation from "../nav/navigation";
+import HeaderAdmin from '../header/headerAdmin'
 
 const CategoryCreate = () => {
     const [name, setName] = useState("");
@@ -74,9 +75,11 @@ const CategoryCreate = () => {
     }
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 pl-0">
                     <Navigation />
                 </div>
                 <div className="col">
@@ -98,6 +101,7 @@ const CategoryCreate = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

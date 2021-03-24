@@ -10,6 +10,7 @@ import StarRating from 'react-star-ratings'
 import RatingModal from '../modal/rating'
 import ShowAverageRating from './showAverageRating';
 import CardProduct from '../card/cardProduct';
+import Header from '../nav/header'
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
@@ -57,6 +58,8 @@ const DetailProduct = ({ match }) => {
     }
 
     return (
+        <>
+        <Header />
         <div className="container-fluid">
             <div className="row pt-4">
                 <div className="col-md-5">
@@ -185,6 +188,7 @@ const DetailProduct = ({ match }) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

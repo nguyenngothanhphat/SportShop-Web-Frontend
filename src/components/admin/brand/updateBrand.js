@@ -6,6 +6,7 @@ import { getCategories } from "../../../util/api/category-apis";
 import { updateBrand, getBrand } from "../../../util/api/brand-apis";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import HeaderAdmin from '../header/headerAdmin'
 
 const UpdateSubCategory = ({ match, history }) => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -65,9 +66,11 @@ const UpdateSubCategory = ({ match, history }) => {
     );
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 pl-0">
                     <Navigation />
                 </div>
                 <div className="col">
@@ -98,6 +101,7 @@ const UpdateSubCategory = ({ match, history }) => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

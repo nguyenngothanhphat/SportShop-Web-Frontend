@@ -1,7 +1,10 @@
 import React from "react";
 import Navigation from "../../components/nav/navigation";
+import Header from '../nav/header'
 
 const Wishlist = () => (
+  <>
+  <Header />
   <div className="container-fluid">
     <div className="row">
       <div className="col-md-2">
@@ -10,6 +13,7 @@ const Wishlist = () => (
       <div className="col">user wishlist page</div>
     </div>
   </div>
+  </>
 );
 
 export default Wishlist;

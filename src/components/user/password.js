@@ -3,6 +3,8 @@ import Navigation from "../../components/nav/navigation";
 import { auth } from "../../config/firebase";
 import { toast } from "react-toastify";
 
+import Header from '../nav/header'
+
 const Password = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,6 +50,8 @@ const Password = () => {
   );
 
   return (
+    <>
+    <Header />
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-2">
@@ -63,6 +67,7 @@ const Password = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

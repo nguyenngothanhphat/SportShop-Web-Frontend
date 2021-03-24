@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { auth } from "../../config/firebase";
 import { toast } from "react-toastify";
 
+import Header from '../nav/header'
+
 const Register = ({ history }) => {
   const [email, setEmail] = useState("");
   const { user } = useSelector((state) => ({ ...state }));
@@ -46,6 +48,8 @@ const Register = ({ history }) => {
   );
 
   return (
+    <>
+    <Header />
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -54,6 +58,7 @@ const Register = ({ history }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

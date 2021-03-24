@@ -75,7 +75,7 @@ const Routes = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <ToastContainer />
       <Switch>
         <Route path="/" exact component={Home} />

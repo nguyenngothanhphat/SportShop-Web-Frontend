@@ -6,6 +6,7 @@ import { getCategories } from "../../../util/api/category-apis";
 import { createBrand, getBrands, removeBrand } from "../../../util/api/brand-apis";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import HeaderAdmin from '../header/headerAdmin'
 
 const CreateBrand = () => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -83,9 +84,11 @@ const CreateBrand = () => {
     );
 
     return (
+        <>
+        <HeaderAdmin />
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-2 pl-0">
                     <Navigation />
                 </div>
                 <div className="col">
@@ -124,6 +127,7 @@ const CreateBrand = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 
