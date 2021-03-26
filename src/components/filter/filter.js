@@ -5,9 +5,10 @@ import {
 } from "../../util/api/product-apis";
 import { getCategories } from '../../util/api/category-apis'
 import { getSubs } from '../../util/api/sub-apis'
+import { getBrands } from '../../util/api/brand-apis';
 import { useSelector, useDispatch } from "react-redux";
 import CardProduct from "../card/cardProduct";
-import { Menu, Slider, Checkbox } from "antd";
+import { Menu, Slider, Checkbox, Radio } from "antd";
 import { DollarOutlined, DownSquareOutlined, StarOutlined } from "@ant-design/icons";
 import Star from '../star/star';
 
@@ -25,6 +26,11 @@ const Filter = () => {
   const [ok, setOk] = useState(false);
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
+  const [brands, setBrands] = useState([]);
+  const [brand, setBrand] = useState("");
+  const [colors, setColors] = useState(["Chocolate", "Chocolate Coconut", "Vanilla Espresso", "Mojito", "Orange mango", "Peach Tea", "Banana", "Blueberry", "Chocolate mint", "Milk Tea", "White Chocolate", "Chocolate Mint", "Chocolate Smooth"])
+  const [color, setColor] = useState("");
+  const [shipping, setShipping] = useState("");
 
   let dispatch = useDispatch();
 
@@ -36,7 +42,8 @@ const Filter = () => {
     loadAllProducts();
     loadCategories();
     // fetch subcategories
-    getSubs().then((res) => setSubs(res.data));
+    loadSubs();
+    loadBrands();
   }, []);
 
   /* Load products by default on page load */
@@ -47,8 +54,16 @@ const Filter = () => {
     });
   };
 
+  const loadSubs = () => {
+    getSubs().then((res) => setSubs(res.data));
+  }
+
   const loadCategories = () => {
     getCategories().then(res => setCategories(res.data))
+  }
+
+  const loadBrands = () => {
+    getBrands().then(res => setBrands(res.data))
   }
 
   /* Load products on user search input */
@@ -177,15 +192,105 @@ const Filter = () => {
     fetchProducts({ sub });
   };
 
+  const showBrands = () => {
+    brands.map((brand) => (
+      <div key={brand._id} onClick={() => handleBrand(brand)} className="p-1 m-1 badge badge-secondary"
+        style={{ cursor: "pointer" }}>
+        {brand.name}
+      </div>
+    ))
+  }
+
+  const handleBrand = (brand) => {
+    console.log("Brand", brand);
+    setBrand(brand);
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    setSub("");
+    fetchProducts({ brand });
+  };
+
+  // 8. show products based on color
+  const showColors = () =>
+    colors.map((c) => (
+      <Radio
+        value={c}
+        name={c}
+        checked={c === color}
+        onChange={handleColor}
+        className="pb-1 pl-4 pr-4"
+      >
+        {c}
+      </Radio>
+    ));
+
+  const handleColor = (e) => {
+    setSub("");
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    setBrand("");
+    setColor(e.target.value);
+    // setShipping("");
+    fetchProducts({ color: e.target.value });
+  };
+
+  // 9. show products based on shipping yes/no
+  const showShipping = () => (
+    <>
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShippingchange}
+        value="Yes"
+        checked={shipping === "Yes"}
+      >
+        Yes
+      </Checkbox>
+
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShippingchange}
+        value="No"
+        checked={shipping === "No"}
+      >
+        No
+      </Checkbox>
+    </>
+  );
+
+  const handleShippingchange = (e) => {
+    setSub("");
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    setBrand("");
+    setColor("");
+    setShipping(e.target.value);
+    fetchProducts({ shipping: e.target.value });
+  };
+
   return (
     <>
       <Header />
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md- pt-2">
+          <div className="col-md-3 pt-2">
             <h4>Search/Filter</h4>
             <hr />
-            <Menu defaultOpenKeys={["1", "2", "3", "4"]} mode="inline">
+            <Menu defaultOpenKeys={["1", "2", "3", "4", "5"]} mode="inline">
               {/* Price range */}
               <SubMenu
                 key="1"
@@ -242,6 +347,48 @@ const Filter = () => {
               >
                 <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
                   {showSubs()}
+                </div>
+              </SubMenu>
+
+              {/* brand */}
+              <SubMenu
+                key="5"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Brand
+                </span>
+                }
+              >
+                <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
+                  {showBrands()}
+                </div>
+              </SubMenu>
+
+              {/* smell */}
+              <SubMenu
+                key="6"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Smell
+                </span>
+                }
+              >
+                <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
+                  {showColors()}
+                </div>
+              </SubMenu>
+
+              {/* shipping */}
+              <SubMenu
+                key="7"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Shipping
+                </span>
+                }
+              >
+                <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
+                  {showShipping()}
                 </div>
               </SubMenu>
             </Menu>

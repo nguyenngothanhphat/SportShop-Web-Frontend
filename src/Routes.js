@@ -30,6 +30,7 @@ import DetailProduct from './components/product/detail';
 import CategoryHome from './components/category/detailCategory';
 import SubCategoryHome from './components/category/detailSubCategory';
 import Filter from './components/filter/filter';
+import Cart from './components/shoppingCart/cart'
 import "./styles.css";
 
 /* import private */
@@ -100,6 +101,7 @@ const Routes = () => {
         <Route path="/category/:slug" component={CategoryHome} />
         <Route path="/sub/:slug" component={SubCategoryHome} />
         <Route path="/filter/product" component={Filter} />
+        <Route path="/cart" component={Cart} />
       </Switch>
       {/* <Footer /> */}
     </>

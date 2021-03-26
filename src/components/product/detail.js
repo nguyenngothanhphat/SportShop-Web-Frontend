@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Tabs } from 'antd';
+import { Card, Tabs, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { getProduct, getProductsCount, productStar, getRelated } from '../../util/api/product-apis';
 import StarRating from 'react-star-ratings'
+import _ from "lodash";
 import RatingModal from '../modal/rating'
 import ShowAverageRating from './showAverageRating';
 import CardProduct from '../card/cardProduct';
@@ -19,12 +20,16 @@ const DetailProduct = ({ match }) => {
     const [product, setProduct] = useState({});
     const [related, setRelated] = useState([]);
     const [star, setStar] = useState(0);
+    const [tooltip, setTooltip] = useState("Click to add");
+
+    const dispatch = useDispatch();
 
     const { _id, title, description, images, category, price, subs, shipping, color, brand, quantity, sold, ratings } = product;
 
     const { slug } = match.params;
 
-    const { user } = useSelector((state) => ({ ...state }))
+    const { user, cart } = useSelector((state) => ({ ...state }))
+    
 
     useEffect(() => {
         loadSingleProduct();
@@ -57,6 +62,35 @@ const DetailProduct = ({ match }) => {
         })
     }
 
+    const handleAddToCart = () => {
+        let cart = []
+        if (typeof window !== 'undefined') {
+          /* if cart is in localstorage GET it */
+          if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"))
+          }
+    
+          /* push new product to cart */
+          cart.push({
+            ...product,
+            count: 1,
+          })
+    
+          /* Remove duplicates */
+          let unique = _.uniqWith(cart, _.isEqual);
+          /* Save to local storage */
+          localStorage.setItem("cart", JSON.stringify(unique));
+          /* Show tooltip */
+          setTooltip("Added");
+    
+          /* Add to redux state */
+          dispatch({
+            type: "ADD_TO_CART",
+            payload: unique,
+          })
+        }
+      }
+
     return (
         <>
         <Header />
@@ -83,10 +117,11 @@ const DetailProduct = ({ match }) => {
                     <h3>{title}</h3>
                     {product && product.ratings && product.ratings.length > 0 ? ShowAverageRating(product) : <div className="text-center pt-1 pb-3">No rating yet</div>}
                     <Card actions={[
-                        <>
-                            <ShoppingCartOutlined className="text-success" /> <br />
-                            Add to Cart
-                        </>,
+                        <Tooltip title={tooltip}>
+                        <a onClick={handleAddToCart}>
+                          <ShoppingCartOutlined className="text-success" /> <br /> Add to Cart
+                        </a>
+                      </Tooltip>,
                         <Link to="/">
                             <HeartOutlined className="text-info" /><br /> Add to Wishlist
                         </Link>,
