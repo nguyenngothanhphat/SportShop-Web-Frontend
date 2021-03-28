@@ -70,6 +70,9 @@ const Filter = () => {
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
+      if (!text) {
+        loadAllProducts();
+      }
     }, 300);
     return () => clearTimeout(delayed);
   }, [text]);
@@ -217,8 +220,9 @@ const Filter = () => {
 
   // 8. show products based on color
   const showColors = () =>
-    colors.map((c) => (
+    colors.map((c, index) => (
       <Radio
+        key={index}
         value={c}
         name={c}
         checked={c === color}

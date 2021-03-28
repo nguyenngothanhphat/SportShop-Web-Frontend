@@ -30,7 +30,8 @@ import DetailProduct from './components/product/detail';
 import CategoryHome from './components/category/detailCategory';
 import SubCategoryHome from './components/category/detailSubCategory';
 import Filter from './components/filter/filter';
-import Cart from './components/shoppingCart/cart'
+import Cart from './components/shoppingCart/cart';
+import CheckOut from './components/shoppingCart/checkout';
 import "./styles.css";
 
 /* import private */
@@ -77,6 +78,7 @@ const Routes = () => {
   return (
     <>
       {/* <Header /> */}
+      {/* <CartModal /> */}
       <ToastContainer />
       <Switch>
         <Route path="/" exact component={Home} />
@@ -102,6 +104,7 @@ const Routes = () => {
         <Route path="/sub/:slug" component={SubCategoryHome} />
         <Route path="/filter/product" component={Filter} />
         <Route path="/cart" component={Cart} />
+        <UserPrivate path="/checkout" exact component={CheckOut} />
       </Switch>
       {/* <Footer /> */}
     </>
