@@ -32,3 +32,11 @@ export const saveUserAddress = async (authtoken, address) => {
         }
     })
 }
+
+export const applyCoupon = async (authtoken, coupon) => {
+    return await axios.post(`${API}/user/cart/coupon`, {coupon}, {
+        headers: {
+            authtoken,
+        }
+    })
+}

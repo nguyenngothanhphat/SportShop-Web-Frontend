@@ -32,6 +32,8 @@ import SubCategoryHome from './components/category/detailSubCategory';
 import Filter from './components/filter/filter';
 import Cart from './components/shoppingCart/cart';
 import CheckOut from './components/shoppingCart/checkout';
+import CreateCoupon from './components/admin/coupon/createCoupon';
+import Payment from './components/shoppingCart/payment';
 import "./styles.css";
 
 /* import private */
@@ -105,6 +107,8 @@ const Routes = () => {
         <Route path="/filter/product" component={Filter} />
         <Route path="/cart" component={Cart} />
         <UserPrivate path="/checkout" exact component={CheckOut} />
+        <UserPrivate path="/payment" exact component={Payment} />
+        <AdminPrivate path="/admin/coupon" exact component={CreateCoupon} />
       </Switch>
       {/* <Footer /> */}
     </>
