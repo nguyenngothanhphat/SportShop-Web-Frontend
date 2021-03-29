@@ -18,7 +18,7 @@ export const getUserCart = async (authtoken) => {
 }
 
 export const emptyUserCart = async (authtoken) => {
-    return await axios.delete(`${API}/user/cart`, { 
+    return await axios.delete(`${API}/user/cart`, {
         headers: {
             authtoken,
         }
@@ -26,7 +26,7 @@ export const emptyUserCart = async (authtoken) => {
 }
 
 export const saveUserAddress = async (authtoken, address) => {
-    return await axios.post(`${API}/user/address`, {address}, {
+    return await axios.post(`${API}/user/address`, { address }, {
         headers: {
             authtoken,
         }
@@ -34,7 +34,23 @@ export const saveUserAddress = async (authtoken, address) => {
 }
 
 export const applyCoupon = async (authtoken, coupon) => {
-    return await axios.post(`${API}/user/cart/coupon`, {coupon}, {
+    return await axios.post(`${API}/user/cart/coupon`, { coupon }, {
+        headers: {
+            authtoken,
+        }
+    })
+}
+
+export const createOrder = async (stripeResponse, authtoken) => {
+    return await axios.post(`${API}/user/order`, { stripeResponse }, {
+        headers: {
+            authtoken
+        }
+    })
+}
+
+export const getUserOrders = async (authtoken) => {
+    return await axios.get(`${API}/user/orders`, {
         headers: {
             authtoken,
         }
