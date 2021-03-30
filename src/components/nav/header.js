@@ -90,87 +90,124 @@ const Header = () => {
     //         <Search />
     //   </span>
     // </Menu>
-
-    // <div className="container-fluid">
-    //   <div className="header">
-    //     <div className="logo">
-    //       <i className="fas fa-bolt"></i>
-    //       <a href="/">Thanh Phat</a>
-    //     </div>
-    //     <div className="mobileHidden">
-    //       <Anchor targetOffset="65">
-    //         <Link href="/" title="Home" />
-    //         <Link href="/filter/product" title="Promotions" />
-    //         <Link href="/filter/product" title="Product" />
-    //         <Link href="/filter/product" title="Accessories" />
-    //         <Link href="#" title="Blog" />
-    //         <Link href="#" title="Contact us" />
-    //         <Badge count={cart.length} offset={[9, 0]} style={{ right: "9px" }}>
-    //           <Link href="/cart" title="Cart" />
-    //         </Badge>
-    //         {!user && <Link href="/login" title="Login" />}
-
-    //         {!user && <Link href="/register" title="Register" />}
-
-    //         {user && <Link title={user.email && user.email.split("@")[0]} />}
-
-    //       </Anchor>
-    //     </div>
-    //     <div className="mobileVisible">
-    //       <Button type="primary" onClick={showDrawer}>
-    //         <i className="fas fa-bars"></i>
-    //       </Button>
-    //       <Drawer
-    //         placement="right"
-    //         closable={false}
-    //         onClose={onClose}
-    //         visible={visible}
-    //       >
-    //         <Anchor targetOffset="65">
-    //           <Link href="#hero" title="Home" />
-    //           <Link href="#about" title="About" />
-    //           <Link href="#feature" title="Features" />
-    //           <Link href="#works" title="How it works" />
-    //           <Link href="#faq" title="FAQ" />
-    //           <Link href="#pricing" title="Pricing" />
-    //           <Link href="#contact" title="Contact" />
-    //         </Anchor>
-    //       </Drawer>
-    //     </div>
-    //   </div>
-    // </div>
     <header>
       <div id="top-header">
         <div className="container">
-          <ul className="header-links pull-left">
-            <li>
-              <Link>
-                <i className="fa fa-phone"></i> +021-95-51-84
+          <div className="row">
+            <div className="col-md-9">
+              <ul className="header-links pull-left">
+                <li>
+                  <Link>
+                    <i className="fa fa-phone"></i> 0941992082
+                  </Link>
+                </li>
+                <li>
+                  <Link>
+                    <i className="fas fa-envelope"></i> thanhphat19@gmail.com
               </Link>
-            </li>
-            <li>
-              <Link>
-                <i className="fa fa-envelope-o"></i> thanhphat19@gmail.com
+                </li>
+                <li>
+                  <Link>
+                    <i className="fa fa-map-marker"></i> Pham Phu Thu
               </Link>
-            </li>
-            <li>
-              <Link>
-                <i className="fa fa-map-marker"></i> Pham Phu Thu
-              </Link>
-            </li>
-          </ul>
-          <ul className="header-links pull-right">
-            <li>
-              <Link>
-                <i className="fa fa-dollar"></i> USD
-              </Link>
-            </li>
-            <li>
-              <Link>
-                <i className="fa fa-user-o"></i> My Account
-              </Link>
-            </li>
-          </ul>
+                </li>
+              </ul>
+            </div>
+            <div className="col-md-3">
+              <ul className="header-links pull-right">
+                {!user && (
+                  <li>
+                    <Link to="/login">
+                      <i className="fa fa-dollar"></i> Login
+                    </Link>
+                  </li>
+                )}
+
+                {!user && (
+                  <li>
+                    <Link to="/register">
+                      <i className="fa fa-dollar"></i> Register
+                    </Link>
+                  </li>
+                )}
+                {user && (
+                  <li >
+                    <Link onClick={logout}>
+                      <i className="fa fa-dollar"></i> Logout
+                    </Link>
+                  </li>
+                )}
+                {user && (
+                  user && user.role === 'subscriber' && (
+                    <li>
+                      <Link to="/user/history">
+                        <i className="fa fa-dollar"></i> {user.email && user.email.split("@")[0]}
+                      </Link>
+                    </li>
+                  )
+                )}
+                {user && (
+                  user && user.role === 'admin' && (
+                    <li>
+                      <Link to="/admin/dashboard">
+                        <i className="fa fa-dollar"></i> {user.email && user.email.split("@")[0]}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3">
+              <div className="header-logo">
+                <Link to="/" className="logo">
+                  <img src="https://images-platform.99static.com/5BxXBtjYaE26YEilreN-dMWuJGE=/95x94:895x894/500x500/top/smart/99designs-contests-attachments/115/115127/attachment_115127503" style={{ width: "80%", marginTop: "-68px" }} alt="logo" />
+                </Link>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="header-search">
+                <form>
+                  <input className="input" placeholder="Search here" style={{ borderRadius: "40px 0px 0px 40px", width: "435px" }}
+                    name='search' />
+                  <button className="search-btn">Search</button>
+                </form>
+              </div>
+            </div>
+            <div className="col-md-3 clearfix">
+              <div className="header-ctn">
+                <div>
+                  <a href="#">
+                    <i className="fas fa-heart"></i>
+                    <span>Your Wishlist</span>
+                    <div className="qty">2</div>
+                  </a>
+                </div>
+                <div className="dropdown">
+                  {/* <Badge count={cart.length} offset={[9, 0]} style={{ right: "9px" }}> */}
+                  <Link to="/cart" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <i className="fa fa-shopping-cart"></i>
+                    <span>Your Cart</span>
+                    <div className="qty">{cart.length}</div>
+                  </Link>
+                  {/* </Badge> */}
+
+                  {/* <CartList carts={carts} /> */}
+                </div>
+                <div className="menu-toggle">
+                  <Link>
+                    <i className="fa fa-bars"></i>
+                    <span>Menu</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
