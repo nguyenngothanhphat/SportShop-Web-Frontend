@@ -14,7 +14,7 @@
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: green;
+  background-color: rgb(9, 45, 204);
 }
 
 .header-links li {
@@ -47,7 +47,7 @@
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: green;
+  background-color: rgb(9, 45, 204);
 }
 
 .header-logo {

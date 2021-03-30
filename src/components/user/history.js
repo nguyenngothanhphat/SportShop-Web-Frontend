@@ -5,12 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { toast } from 'react-toastify'
 
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
+
 import ShowPaymentInfo from "./showPaymentInfo";
 import Header from '../nav/header'
+import Invoice from "../pdf/invoice";
 
 const History = () => {
   const [orders, setOrders] = useState([]);
-  const {user} = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     loadUserOrders();
   }, []);
@@ -55,6 +58,16 @@ const History = () => {
     </table>
   );
 
+  const showDownloadLink = (order) => (
+    <PDFDownloadLink
+      document={<Invoice order={order} />}
+      fileName="invoice.pdf"
+      className="btn btn-sm btn-block btn-outline-primary"
+    >
+      Download PDF
+    </PDFDownloadLink>
+  );
+
   const showEachOrders = () =>
     orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
@@ -62,7 +75,7 @@ const History = () => {
         {showOrderInTable(order)}
         <div className="row">
           <div className="col">
-            <p>PDF download</p>
+            {showDownloadLink(order)}
           </div>
         </div>
       </div>
@@ -70,20 +83,20 @@ const History = () => {
 
   return (
     <>
-    <Header />
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2">
-          <Navigation />
-        </div>
-        <div className="col text-center">
-          <h4>
-            {orders.length > 0 ? "User purchase orders" : "No purchase orders"}
-          </h4>
-          {showEachOrders()}
+      <Header />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <Navigation />
+          </div>
+          <div className="col text-center">
+            <h4>
+              {orders.length > 0 ? "User purchase orders" : "No purchase orders"}
+            </h4>
+            {showEachOrders()}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
