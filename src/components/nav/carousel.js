@@ -1,47 +1,23 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Zoom } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
 
-import { Carousel } from 'antd';
+const images = [
+  'https://cdn-blfpb.nitrocdn.com/KXssXvFtwdXSbxzghIjAxqLViXMHOnkX/assets/static/optimized/rev-0cf1de5/wp-content/uploads/2021/03/Banner-Trusted-Feb-2021.png',
+  'https://cdn-blfpb.nitrocdn.com/KXssXvFtwdXSbxzghIjAxqLViXMHOnkX/assets/static/optimized/rev-0cf1de5/wp-content/uploads/2020/08/vegan-protein-2508.png',
+  'https://cdn-blfpb.nitrocdn.com/KXssXvFtwdXSbxzghIjAxqLViXMHOnkX/assets/static/optimized/rev-0cf1de5/wp-content/uploads/2019/10/2-2.jpg'
+];
 
-const items = [
-  {
-    key: '1',
-    title: 'Web and mobile payment built for developers',
-    content: 'An vim odio ocurreret consetetur, justo constituto ex mea. Quidam facilisis vituperata pri ne. Id nostrud gubergren urbanitas sed, quo summo animal qualisque ut, cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-  },
-  {
-    key: '2',
-    title: 'Work better together. Schedule meetings',
-    content: 'An vim odio ocurreret consetetur, justo constituto ex mea. Quidam facilisis vituperata pri ne. Id nostrud gubergren urbanitas sed, quo summo animal qualisque ut, cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-  },
-  {
-    key: '3',
-    title: 'The best app to increase your productivity',
-    content: 'An vim odio ocurreret consetetur, justo constituto ex mea. Quidam facilisis vituperata pri ne. Id nostrud gubergren urbanitas sed, quo summo animal qualisque ut, cu nostro dissentias consectetuer mel. Ut admodum conceptam mei, cu eam tation fabulas abhorreant. His ex mandamus.',
-  },
-]
-
-const Carousel_1 = () => {
+const Slideshow = () => {
   return (
-    <div id="hero" className="heroBlock">
-      <Carousel autoplay>
-        {items.map(item => {
-          return (
-            <div key={item.key} className="container-fluid">
-              <div className="content">
-                <h3>{item.title}</h3>
-                <p>{item.content}</p>
-                <div className="btnHolder">
-                  <Button type="primary" size="large">Shop Now</Button>
-                  {/* <Button size="large"><i className="fas fa-desktop"></i> Watch a Demo</Button> */}
-                </div>
-              </div>
-            </div>  
-          );
-        })}
-      </Carousel>
-    </div>
-  );
+    <div className="slide-container">
+        <Zoom scale={0.4} autoplay>
+          {
+            images.map((each, index) => <img key={index} style={{width: "100%"}} src={each} />)
+          }
+        </Zoom>
+      </div>
+  )
 }
 
-export default Carousel_1;
+export default Slideshow;

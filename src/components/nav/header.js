@@ -94,7 +94,7 @@ const Header = () => {
       <div id="top-header">
         <div className="container">
           <div className="row">
-            <div className="col-md-9">
+            <div className="col-md-7">
               <ul className="header-links pull-left">
                 <li>
                   <Link>
@@ -104,16 +104,16 @@ const Header = () => {
                 <li>
                   <Link>
                     <i className="fas fa-envelope"></i> thanhphat19@gmail.com
-              </Link>
+                  </Link>
                 </li>
                 <li>
                   <Link>
                     <i className="fa fa-map-marker"></i> Pham Phu Thu
-              </Link>
+                  </Link>
                 </li>
               </ul>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-5">
               <ul className="header-links pull-right">
                 {!user && (
                   <li>
@@ -131,29 +131,27 @@ const Header = () => {
                   </li>
                 )}
                 {user && (
-                  <li >
+                  <li>
                     <Link onClick={logout}>
-                      <i className="fa fa-dollar"></i> Logout
+                      <i className="fas fa-sign-out-alt"></i> Logout
                     </Link>
                   </li>
                 )}
-                {user && (
-                  user && user.role === 'subscriber' && (
-                    <li>
-                      <Link to="/user/history">
-                        <i className="fa fa-dollar"></i> {user.email && user.email.split("@")[0]}
-                      </Link>
-                    </li>
-                  )
+                {user && user && user.role === "subscriber" && (
+                  <li>
+                    <Link to="/user/history">
+                      <i className="fas fa-user"></i>{" "}
+                      {user.email && user.email.split("@")[0]}
+                    </Link>
+                  </li>
                 )}
-                {user && (
-                  user && user.role === 'admin' && (
-                    <li>
-                      <Link to="/admin/dashboard">
-                        <i className="fa fa-dollar"></i> {user.email && user.email.split("@")[0]}
-                      </Link>
-                    </li>
-                  )
+                {user && user && user.role === "admin" && (
+                  <li>
+                    <Link to="/admin/dashboard">
+                      <i className="fas fa-user"></i>{" "}
+                      {user.email && user.email.split("@")[0]}
+                    </Link>
+                  </li>
                 )}
               </ul>
             </div>
@@ -166,15 +164,26 @@ const Header = () => {
             <div className="col-md-3">
               <div className="header-logo">
                 <Link to="/" className="logo">
-                  <img src="https://images-platform.99static.com/5BxXBtjYaE26YEilreN-dMWuJGE=/95x94:895x894/500x500/top/smart/99designs-contests-attachments/115/115127/attachment_115127503" style={{ width: "80%", marginTop: "-68px" }} alt="logo" />
+                  <img
+                    src="https://images-platform.99static.com/5BxXBtjYaE26YEilreN-dMWuJGE=/95x94:895x894/500x500/top/smart/99designs-contests-attachments/115/115127/attachment_115127503"
+                    style={{ width: "80%", marginTop: "-68px" }}
+                    alt="logo"
+                  />
                 </Link>
               </div>
             </div>
             <div className="col-md-6">
               <div className="header-search">
                 <form>
-                  <input className="input" placeholder="Search here" style={{ borderRadius: "40px 0px 0px 40px", width: "435px" }}
-                    name='search' />
+                  <input
+                    className="input"
+                    placeholder="Search here"
+                    style={{
+                      borderRadius: "40px 0px 0px 40px",
+                      width: "435px",
+                    }}
+                    name="search"
+                  />
                   <button className="search-btn">Search</button>
                 </form>
               </div>
@@ -190,7 +199,12 @@ const Header = () => {
                 </div>
                 <div className="dropdown">
                   {/* <Badge count={cart.length} offset={[9, 0]} style={{ right: "9px" }}> */}
-                  <Link to="/cart" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  <Link
+                    to="/cart"
+                    className="dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-expanded="true"
+                  >
                     <i className="fa fa-shopping-cart"></i>
                     <span>Your Cart</span>
                     <div className="qty">{cart.length}</div>
@@ -206,6 +220,32 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="menu-bar">
+              <ul>
+                <li className="active">
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">Promotions</a>
+                </li>
+                <li>
+                  <a href="#">Products</a>
+                  <ul className="sub-menu-1">
+                    <li><a href="#">Protein</a></li>
+                    <li><a href="#">Protein 1</a></li>
+                    <li><a href="#">Protein 2</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Blogs</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

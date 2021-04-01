@@ -60,7 +60,7 @@ ol {
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(13, 16, 48);
+  background-color: rgb(35, 45, 150);
 }
 
 .header-links li {
@@ -90,6 +90,44 @@ ol {
   margin-left: 94px;
 }
 
+/* Menu */
+.menu-bar {
+  text-align: center;
+}
+
+.menu-bar ul {
+  display: inline-flex;
+  list-style: none;
+  color: black
+}
+
+.menu-bar ul li {
+  width: 120px;
+  margin: 15px;
+  padding: 15px;
+}
+
+.menu-bar ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+li.active a, .menu-bar ul li a:hover {
+  color: green;
+}
+
+.sub-menu-1 {
+  display: none;
+}
+
+.menu-bar ul li:hover, .sub-menu-1 {
+  display: block;
+  position: absolute;
+  background-color: white;
+  margin-top: 15px;
+  margin-left: -15px
+}
+
 /*----------------------------*\
 	Logo
 \*----------------------------*/
@@ -97,7 +135,8 @@ ol {
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: rgb(13, 16, 48);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 5px solid red;
 }
 
 .header-logo {
@@ -182,10 +221,12 @@ ol {
 .header-ctn>div>a>i {
   display: block;
   font-size: 18px;
+  color: black;
 }
 
 .header-ctn>div>a>span {
   font-size: 12px;
+  color: black;
 }
 
 .header-ctn>div>a>.qty {
