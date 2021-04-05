@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Anchor, Drawer, Button, Badge } from "antd";
 import firebase from "firebase";
@@ -9,8 +10,6 @@ import Search from "../search/search";
 // const { Link } = Anchor;
 
 const Header = () => {
-  const [visible, setVisible] = useState(false);
-
   let dispatch = useDispatch();
   let { user, cart } = useSelector((state) => ({ ...state }));
 
@@ -23,14 +22,6 @@ const Header = () => {
       payload: null,
     });
     history.push("/login");
-  };
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
   };
 
   return (
@@ -92,7 +83,7 @@ const Header = () => {
     // </Menu>
     <header>
       <div id="top-header">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-7">
               <ul className="header-links pull-left">
@@ -159,16 +150,16 @@ const Header = () => {
         </div>
       </div>
       <div id="header">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-3">
               <div className="header-logo">
                 <Link to="/" className="logo">
-                  <img
+                  {/* <img
                     src="https://images-platform.99static.com/5BxXBtjYaE26YEilreN-dMWuJGE=/95x94:895x894/500x500/top/smart/99designs-contests-attachments/115/115127/attachment_115127503"
                     style={{ width: "80%", marginTop: "-68px" }}
                     alt="logo"
-                  />
+                  /> */}
                 </Link>
               </div>
             </div>
@@ -222,7 +213,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="menu-bar">
               <ul>
                 <li className="active">
@@ -247,7 +238,7 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

@@ -2,34 +2,34 @@ import React, { useState } from "react";
 import { Card, Tooltip, Image } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import StarRating from 'react-star-ratings';
+import StarRating from "react-star-ratings";
 import _ from "lodash";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
-
-import ShowAverageRating from '../product/showAverageRating';
+import ShowAverageRating from "../product/showAverageRating";
 
 const { Meta } = Card;
 
 const CardProduct = ({ product }) => {
   const [tooltip, setTooltip] = useState("Click to add");
 
+  // eslint-disable-next-line no-unused-vars
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    let cart = []
-    if (typeof window !== 'undefined') {
-      /* if cart is in localstorage GET it */
+    let cart = [];
+    if (typeof window !== "undefined") {
+      /* if cart is in localStorage GET it */
       if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"))
+        cart = JSON.parse(localStorage.getItem("cart"));
       }
 
       /* push new product to cart */
       cart.push({
         ...product,
         count: 1,
-      })
+      });
 
       /* Remove duplicates */
       let unique = _.uniqWith(cart, _.isEqual);
@@ -42,15 +42,15 @@ const CardProduct = ({ product }) => {
       dispatch({
         type: "ADD_TO_CART",
         payload: unique,
-      })
+      });
     }
-  }
+  };
 
-  // destructure
+  // Destructure
   const { images, title, description, slug, price } = product;
   return (
     <>
-      <Card
+      {/* <Card
         cover={
           <Image
             src={images && images.length ? images[0].url : ""}
@@ -74,14 +74,72 @@ const CardProduct = ({ product }) => {
         {product && product.ratings && product.ratings.length > 0 ? (
           ShowAverageRating(product)
         ) : (
-          // <div className="text-center pt-1 pb-3">No rating yet</div>
           <div><StarRating starDimension="20px" starSpacing="2px" editing={false} />{" "} (0)</div>
         )}
         <Meta
           title={`${title} - $${price}`}
           description={`${description && description.substring(0, 40)}...`}
         />
-      </Card>
+      </Card> */}
+
+      <div
+        className="product "
+        style={{ width: "245px", marginLeft: "30px", marginBottom: "35px" }}
+      >
+        <div className="product-img">
+          <img src={images && images.length ? images[0].url : ""} alt="" />
+        </div>
+        <div className="product-body">
+          <p className="product-category">{slug}</p>
+          <h3 className="product-name">
+            <Link>{title}</Link>
+          </h3>
+          <h4 className="product-price">${price}</h4>
+          {product && product.ratings && product.ratings.length > 0 ? (
+            ShowAverageRating(product)
+          ) : (
+            <div>
+              <StarRating
+                starDimension="20px"
+                starSpacing="2px"
+                editing={false}
+              />{" "}
+              (0)
+            </div>
+          )}
+          <div className="product-btns">
+            <button className="add-to-wishlist">
+              <i className="fas fa-heart"></i>
+              <span className="tooltipp">Add to Wishlist</span>
+            </button>
+            <button className="quick-view">
+              <Link to={`/product/${slug}`}>
+                <i className="fa fa-eye"></i>
+              </Link>
+              <span className="tooltipp">Quick View</span>
+            </button>
+          </div>
+        </div>
+        <div className="add-to-cart">
+          <button
+            className="add-to-cart-btn"
+            onClick={handleAddToCart}
+            disabled={product.quantity < 1}
+          >
+            {product.quantity < 1 ? (
+              <>
+                {" "}
+                <i className="fa fa-shopping-cart"></i>Out of stock
+              </>
+            ) : (
+              <>
+                {" "}
+                <i className="fa fa-shopping-cart"></i>Add to Cart
+              </>
+            )}
+          </button>
+        </div>
+      </div>
     </>
   );
 };
