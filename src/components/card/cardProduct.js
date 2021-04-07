@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Card, Tooltip, Image } from "antd";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import StarRating from "react-star-ratings";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import ShowAverageRating from "../product/showAverageRating";
+import { addWishlist } from "../../util/api/user-apis";
 
 const { Meta } = Card;
 
@@ -16,6 +18,9 @@ const CardProduct = ({ product }) => {
   // eslint-disable-next-line no-unused-vars
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
+
+  /* Router */
+  let history = useHistory();
 
   const handleAddToCart = () => {
     let cart = [];
@@ -44,6 +49,15 @@ const CardProduct = ({ product }) => {
         payload: unique,
       });
     }
+  };
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    addWishlist(product._id, user.token).then((res) => {
+      console.log("Add to wishlist", res.data);
+      toast.success("Added to Wishlist");
+      history.push("/user/wishlist");
+    });
   };
 
   // Destructure
@@ -92,7 +106,7 @@ const CardProduct = ({ product }) => {
         <div className="product-body">
           <p className="product-category">{slug}</p>
           <h3 className="product-name">
-            <Link>{title}</Link>
+            <Link to={`/product/${slug}`}>{title}</Link>
           </h3>
           <h4 className="product-price">${price}</h4>
           {product && product.ratings && product.ratings.length > 0 ? (
@@ -109,7 +123,9 @@ const CardProduct = ({ product }) => {
           )}
           <div className="product-btns">
             <button className="add-to-wishlist">
-              <i className="fas fa-heart"></i>
+              <a onClick={handleAddToWishlist}>
+                <i className="fas fa-heart"></i>
+              </a>
               <span className="tooltipp">Add to Wishlist</span>
             </button>
             <button className="quick-view">

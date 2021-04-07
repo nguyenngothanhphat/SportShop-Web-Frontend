@@ -165,28 +165,17 @@ const Header = () => {
             </div>
             <div className="col-md-6">
               <div className="header-search">
-                <form>
-                  <input
-                    className="input"
-                    placeholder="Search here"
-                    style={{
-                      borderRadius: "40px 0px 0px 40px",
-                      width: "435px",
-                    }}
-                    name="search"
-                  />
-                  <button className="search-btn">Search</button>
-                </form>
+               <Search />
               </div>
             </div>
             <div className="col-md-3 clearfix">
               <div className="header-ctn">
                 <div>
-                  <a href="#">
+                  <Link to="/user/wishlist">
                     <i className="fas fa-heart"></i>
                     <span>Your Wishlist</span>
                     <div className="qty">2</div>
-                  </a>
+                  </Link>
                 </div>
                 <div className="dropdown">
                   {/* <Badge count={cart.length} offset={[9, 0]} style={{ right: "9px" }}> */}
@@ -213,32 +202,6 @@ const Header = () => {
               </div>
             </div>
           </div>
-          {/* <div className="row">
-            <div className="menu-bar">
-              <ul>
-                <li className="active">
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">Promotions</a>
-                </li>
-                <li>
-                  <a href="#">Products</a>
-                  <ul className="sub-menu-1">
-                    <li><a href="#">Protein</a></li>
-                    <li><a href="#">Protein 1</a></li>
-                    <li><a href="#">Protein 2</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Blogs</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-          </div> */}
         </div>
       </div>
     </header>

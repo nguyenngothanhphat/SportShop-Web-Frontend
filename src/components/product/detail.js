@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Card, Tabs, Tooltip, Layout } from "antd";
-import { Link } from "react-router-dom";
+import { Tabs } from "antd";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
@@ -11,6 +11,7 @@ import {
   productStar,
   getRelated,
 } from "../../util/api/product-apis";
+import { addWishlist } from "../../util/api/user-apis";
 import StarRating from "react-star-ratings";
 import _ from "lodash";
 import RatingModal from "../modal/rating";
@@ -19,6 +20,7 @@ import CardProduct from "../card/cardProduct";
 import AppHeader from "../nav/header";
 import CartModal from "../modal/cartModal";
 import "antd/dist/antd.css";
+import { toast } from "react-toastify";
 
 const { TabPane } = Tabs;
 
@@ -29,6 +31,9 @@ const DetailProduct = ({ match }) => {
   const [tooltip, setTooltip] = useState("Click to add");
 
   const dispatch = useDispatch();
+
+  /* Router */
+  let history = useHistory();
 
   const {
     _id,
@@ -118,6 +123,15 @@ const DetailProduct = ({ match }) => {
     }
   };
 
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    addWishlist(product._id, user.token).then((res) => {
+      console.log("Add to wishlist", res.data);
+      toast.success("Added to Wishlist");
+      history.push("/user/wishlist");
+    });
+  };
+
   return (
     <>
       <AppHeader />
@@ -153,18 +167,13 @@ const DetailProduct = ({ match }) => {
                     <h3 className="product-price">${price} </h3>
                   </div>
                   <p>{description}</p>
-                  <div>
-                    <table>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-                  </div>
                   <ul className="product-btns">
                     <li>
-                      <Link>
-                        <i className="fa fa-heart-o"></i> Add to Wishlist
-                      </Link>
+                      <button className="btn btn-primary">
+                        <a onClick={handleAddToWishlist}>
+                          <i className="fa fa-heart-o"></i> Add to Wishlist
+                        </a>
+                      </button>
                     </li>
                     <li>
                       <Link>

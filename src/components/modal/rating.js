@@ -26,7 +26,7 @@ const Rating = ({ children }) => {
     return (
         <>
             <div onClick={handleModal}>
-                <StarOutlined className="text-danger" /><br />{" "}
+                {/* <StarOutlined className="text-danger" /><br />{" "} */}
                 {user ? "Leave rating" : "Login to leave rating"}
             </div>
             <Modal title="Leave your rating" centered visible={modalVisible}
