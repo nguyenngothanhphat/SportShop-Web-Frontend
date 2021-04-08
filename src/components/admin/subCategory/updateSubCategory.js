@@ -22,12 +22,15 @@ const UpdateSubCategory = ({ match, history }) => {
   }, []);
 
   const loadCategories = () =>
-    getCategories().then((c) => setCategories(c.data));
+    getCategories().then((c) => {
+      setCategories(c.data);
+    });
 
   const loadSub = () =>
     getSub(match.params.slug).then((s) => {
-      setName(s.data.name);
-      setParent(s.data.parent);
+      // console.log("data", s.data);
+      setName(s.data.sub.name);
+      setParent(s.data.sub.parent);
     });
 
   const handleSubmit = (e) => {

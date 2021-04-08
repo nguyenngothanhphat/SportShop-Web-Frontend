@@ -3,7 +3,7 @@ import Navigation from "../nav/navigation";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategory, updateCategory } from "../../../util/api/category-apis";
-import HeaderAdmin from '../header/headerAdmin'
+import HeaderAdmin from "../header/headerAdmin";
 
 const UpdateCategory = ({ history, match }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -15,8 +15,11 @@ const UpdateCategory = ({ history, match }) => {
     loadCategory();
   }, []);
 
-  const loadCategory = () =>
-    getCategory(match.params.slug).then((c) => setName(c.data.name));
+  const loadCategory = () => {
+    getCategory(match.params.slug).then((c) => {
+      setName(c.data.category.name);
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,23 +60,23 @@ const UpdateCategory = ({ history, match }) => {
 
   return (
     <>
-    <HeaderAdmin />
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2 pl-0">
-          <Navigation />
-        </div>
-        <div className="col">
-          {loading ? (
-            <h4 className="text-danger">Loading..</h4>
-          ) : (
-            <h4>Update category</h4>
-          )}
-          {categoryForm()}
-          <hr />
+      <HeaderAdmin />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2 pl-0">
+            <Navigation />
+          </div>
+          <div className="col">
+            {loading ? (
+              <h4 className="text-danger">Loading..</h4>
+            ) : (
+              <h4>Update category</h4>
+            )}
+            {categoryForm()}
+            <hr />
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
