@@ -16,8 +16,6 @@ import {
 import "antd/dist/antd.css";
 import "react-quill/dist/quill.snow.css";
 
-const { Header, Content, Footer } = Layout;
-
 const CheckOut = ({ history }) => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -30,7 +28,8 @@ const CheckOut = ({ history }) => {
   const [discountError, setDiscountError] = useState("");
 
   const dispatch = useDispatch();
-  const { user, COD, coupon } = useSelector((state) => ({ ...state }));
+  const { user, COD } = useSelector((state) => ({ ...state }));
+  const couponTrueOrFalse = useSelector((state) => state.coupon);
 
   useEffect(() => {
     getUserCart(user.token).then((res) => {
@@ -140,8 +139,34 @@ const CheckOut = ({ history }) => {
   };
 
   const createCashOrder = () => {
-    createCashOrderForUser(user.token).then((res) => {
+    createCashOrderForUser(user.token, COD, couponTrueOrFalse).then((res) => {
       console.log("User cash order created res", res);
+      if (res.data.ok) {
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("cart");
+        }
+        /* Empty redux cart */
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: [],
+        });
+        /* Empty redux coupon */
+        dispatch({
+          type: "COUPON_APPLIED",
+          payload: false,
+        });
+        /* Empty redux COD  */
+        dispatch({
+          type: "COD",
+          payload: false,
+        });
+        /* Empty cart from backend */
+        emptyUserCart(user.token);
+        /* Redirect */
+        setTimeout(() => {
+          history.push("/user/history");
+        }, 1000);
+      }
     });
   };
 
