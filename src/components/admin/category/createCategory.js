@@ -12,6 +12,8 @@ const CategoryCreate = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
+    /* Step 1 */
+    const [keyword, setKeyword] = useState("");
 
     const { user } = useSelector(state => ({ ...state }))
 
@@ -74,6 +76,13 @@ const CategoryCreate = () => {
         )
     }
 
+    const handleSearchChange = (event) => {
+        event.preventDefault();
+        setKeyword(event.target.value.toLowerCase());
+    }
+
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
     return (
         <>
         <HeaderAdmin />
@@ -89,8 +98,10 @@ const CategoryCreate = () => {
                         <h4>Create Category</h4>
                     )}
                     {categoryForm()}
+                    {/* Step 2 */}
+                    <input type="search" placeholder="Search category" value={keyword} onChange={handleSearchChange} className="form-control mb-4" />
                     <hr />
-                    {categories.length > 0 && categories.map((category, index) => {
+                    {categories.length > 0 && categories.filter(searched(keyword)).map((category, index) => {
                         return (
                             <div className="alert alert-secondary" key={index}>
                                 {category.name} <span onClick={() => handleRemove(category.slug)} className="btn btn-sm float-right"><DeleteOutlined className="text-danger" /></span>{" "}

@@ -17,6 +17,7 @@ import History from './components/user/history';
 import Password from './components/user/password';
 import Wishlist from './components/user/wishlist';
 import Dashboard from './components/admin/dashboard/dashboard'
+import SellerDashboard from './components/admin/dashboard/sellerDashboard'
 import CreateCategory from './components/admin/category/createCategory'
 import UpdateCategory from './components/admin/category/updateCategory';
 import CreateBrand from './components/admin/brand/createBrand';
@@ -39,6 +40,7 @@ import "./styles.css";
 /* import private */
 import UserPrivate from './components/private/userPrivate';
 import AdminPrivate from './components/private/adminPrivate';
+import SellerPrivate from './components/private/sellerPrivate';
 
 /* import firebase */
 import { auth } from "./config/firebase";
@@ -92,6 +94,7 @@ const Routes = () => {
         <UserPrivate path="/user/password" exact component={Password} />
         <UserPrivate path="/user/wishlist" exact component={Wishlist} />
         <AdminPrivate path="/admin/dashboard" exact component={Dashboard} />
+        <SellerPrivate path="/seller/dashboard" exact component={SellerDashboard} />
         <AdminPrivate path="/admin/category" exact component={CreateCategory} />
         <AdminPrivate path="/admin/category/:slug" exact component={UpdateCategory} />
         <AdminPrivate path="/admin/sub/category" exact component={CreateSubCategory} />
@@ -101,6 +104,9 @@ const Routes = () => {
         <AdminPrivate path="/admin/product" exact component={CreateProduct} />
         <AdminPrivate path="/admin/product/:slug" exact component={UpdateProduct} />
         <AdminPrivate path="/admin/products" exact component={AllProducts} />
+        <SellerPrivate path="/seller/product" exact component={CreateProduct} />
+        <SellerPrivate path="/seller/product/:slug" exact component={UpdateProduct} />
+        <SellerPrivate path="/seller/products" exact component={AllProducts} />
         <Route path="/product/:slug" component={DetailProduct} />
         <Route path="/category/:slug" component={CategoryHome} />
         <Route path="/sub/:slug" component={SubCategoryHome} />

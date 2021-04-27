@@ -37,3 +37,15 @@ export const currentAdmin = async (authtoken) => {
   );
 };
 
+export const currentSeller = async (authtoken) => {
+  return await axios.post(
+    `${API}/current-seller`,
+    {},
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+};
+

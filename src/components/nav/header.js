@@ -128,7 +128,7 @@ const Header = () => {
                     </Link>
                   </li>
                 )}
-                {user && user && user.role === "subscriber" && (
+                {user && user && user.role === "Subscriber" && (
                   <li>
                     <Link to="/user/history">
                       <i className="fas fa-user"></i>{" "}

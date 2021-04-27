@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getCategory } from "../../util/api/category-apis";
 import CardProduct from "../card/cardProduct";
+import Header from '../nav/header';
+import Footer from '../nav/footer';
 
 const CategoryHome = ({ match }) => {
   const [category, setCategory] = useState({});
@@ -19,6 +21,8 @@ const CategoryHome = ({ match }) => {
   }, [slug]);
 
   return (
+      <>
+      <Header />
       <div className="container">
           <div className="row">
             <div className="col">
@@ -43,6 +47,8 @@ const CategoryHome = ({ match }) => {
                 })}
           </div>
       </div>
+      <Footer />
+      </>
   )
 };
 

@@ -17,6 +17,7 @@ const CreateSubCategory = () => {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState("");
     const [subs, setSubs] = useState([]);
+    const [keyword, setKeyword] = useState("");
 
     useEffect(() => {
         loadCategories();
@@ -84,6 +85,13 @@ const CreateSubCategory = () => {
         </form>
     );
 
+    const handleSearchChange = (event) => {
+        event.preventDefault();
+        setKeyword(event.target.value.toLowerCase());
+    }
+
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
     return (
         <>
         <HeaderAdmin />
@@ -116,8 +124,9 @@ const CreateSubCategory = () => {
                         </select>
                     </div>
                     {CategoryForm()}
+                    <input type="search" placeholder="Search sub category" value={keyword} onChange={handleSearchChange} className="form-control mb-4" />
                     <hr />
-                    {subs.length > 0 && subs.map((sub, index) => {
+                    {subs.length > 0 && subs.filter(searched(keyword)).map((sub, index) => {
                         return (
                             <div className="alert alert-secondary" key={index}>
                                 {sub.name} <span onClick={() => handleRemove(sub.slug)} className="btn btn-sm float-right"><DeleteOutlined className="text-danger" /></span>{" "}

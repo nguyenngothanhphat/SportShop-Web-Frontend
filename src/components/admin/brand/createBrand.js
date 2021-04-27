@@ -16,6 +16,7 @@ const CreateBrand = () => {
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState("");
     const [brands, setBrands] = useState([]);
+    const [keyword, setKeyword] = useState("");
 
     useEffect(() => {
         loadCategories();
@@ -83,6 +84,13 @@ const CreateBrand = () => {
         </form>
     );
 
+    const handleSearchChange = (event) => {
+        event.preventDefault();
+        setKeyword(event.target.value.toLowerCase());
+    }
+
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
     return (
         <>
         <HeaderAdmin />
@@ -115,8 +123,9 @@ const CreateBrand = () => {
                         </select>
                     </div>
                     {CategoryForm()}
+                    <input type="search" placeholder="Search brand" value={keyword} onChange={handleSearchChange} className="form-control mb-4" />
                     <hr />
-                    {brands.length > 0 && brands.map((brand, index) => {
+                    {brands.length > 0 && brands.filter(searched(keyword)).map((brand, index) => {
                         return (
                             <div className="alert alert-secondary" key={index}>
                                 {brand.name} <span onClick={() => handleRemove(brand.slug)} className="btn btn-sm float-right"><DeleteOutlined className="text-danger" /></span>{" "}
