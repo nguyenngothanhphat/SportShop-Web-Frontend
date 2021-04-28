@@ -144,6 +144,14 @@ const Header = () => {
                     </Link>
                   </li>
                 )}
+                {user && user && user.role === "seller" && (
+                  <li>
+                    <Link to="/admin/dashboard">
+                      <i className="fas fa-user"></i>{" "}
+                      {user.email && user.email.split("@")[0]}
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

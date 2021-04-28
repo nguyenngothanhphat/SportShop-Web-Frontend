@@ -33,6 +33,8 @@ const Login = ({ history }) => {
     } else {
       if (res.data.role === 'admin') {
         history.push("/admin/dashboard");
+      } else if (res.data.role === 'seller') {
+        history.push("/admin/dashboard");
       } else {
         history.push("/user/history");
       }
