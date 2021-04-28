@@ -116,3 +116,21 @@ export const createCashOrderForUser = async (authtoken, COD, couponTrueOrFalse) 
     }
   );
 };
+
+export const getUsers = async () => {
+  return await axios.get(`${API}/users`);
+}
+
+export const getUser = async (_id) => {
+  return await axios.get(`${API}/user/${_id}`);
+}
+
+export const updateUser = async (userId, user, authtoken) => {
+console.log("🚀 ~ file: user-apis.js ~ line 129 ~ updateUser ~ authtoken", authtoken)
+console.log("🚀 ~ file: user-apis.js ~ line 129 ~ updateUser ~ user", user)
+  return await axios.put(`${API}/user/${userId}`, user, {
+    headers: {
+      authtoken,
+    }
+  })
+}

@@ -70,6 +70,13 @@ const Navigation = () => (
             Password
           </Link>
         </Menu.Item>
+
+        <Menu.Item key="User">
+          <Link to="/admin/users">
+            <KeyOutlined />
+            User
+          </Link>
+        </Menu.Item>
       </Menu>
     </Sider>
   </Layout>

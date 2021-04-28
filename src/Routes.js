@@ -35,6 +35,8 @@ import Cart from './components/shoppingCart/cart';
 import CheckOut from './components/shoppingCart/checkout';
 import CreateCoupon from './components/admin/coupon/createCoupon';
 import Payment from './components/shoppingCart/payment';
+import AllUsers from './components/admin/user/showUsers';
+import UpdateUser from './components/admin/user/updateUser';
 import "./styles.css";
 
 /* import private */
@@ -104,6 +106,8 @@ const Routes = () => {
         <AdminPrivate path="/admin/product" exact component={CreateProduct} />
         <AdminPrivate path="/admin/product/:slug" exact component={UpdateProduct} />
         <AdminPrivate path="/admin/products" exact component={AllProducts} />
+        <AdminPrivate path="/admin/users" exact component={AllUsers} />
+        <AdminPrivate path="/admin/user/:userId" exact component={UpdateUser} />
         <SellerPrivate path="/seller/product" exact component={CreateProduct} />
         <SellerPrivate path="/seller/product/:slug" exact component={UpdateProduct} />
         <SellerPrivate path="/seller/products" exact component={AllProducts} />
