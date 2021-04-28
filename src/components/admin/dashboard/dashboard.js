@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
-import Navigation from '../nav/navigation';
-import HeaderAdmin from '../header/headerAdmin'
-import Orders from '../orders/orders'
+import Navigation from "../nav/navigation";
+import HeaderAdmin from "../header/headerAdmin";
+import Orders from "../orders/orders";
 
-import { getOrders, changeStatus } from '../../../util/api/admin-apis';
+import { getOrders, changeStatus } from "../../../util/api/admin-apis";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -39,7 +39,14 @@ const Dashboard = () => {
           </div>
 
           <div className="col-md-10">
-            <h4>Admin Dashboard</h4>
+            {user && user.role === "admin" && (
+              <h4>Admin Dashboard - {user.name}</h4>
+            )}
+
+            {user && user.role === "seller" && (
+              <h4>Seller Dashboard - {user.name}</h4>
+            )}
+
             {/* {JSON.stringify(orders)} */}
             <Orders orders={orders} handleStatusChange={handleStatusChange} />
           </div>

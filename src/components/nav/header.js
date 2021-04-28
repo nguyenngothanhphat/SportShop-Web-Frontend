@@ -128,7 +128,7 @@ const Header = () => {
                     </Link>
                   </li>
                 )}
-                {user && user && user.role === "Subscriber" && (
+                {user && user && user.role === "subscriber" && (
                   <li>
                     <Link to="/user/history">
                       <i className="fas fa-user"></i>{" "}
@@ -171,13 +171,19 @@ const Header = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <div className="header-search">
                <Search />
               </div>
             </div>
-            <div className="col-md-3 clearfix">
+            <div className="col-md-4 clearfix">
               <div className="header-ctn">
+              <div>
+                  <Link to="/filter/product">
+                    <i className="fas fa-filter"></i>
+                    <span>Filters</span>
+                  </Link>
+                </div>
                 <div>
                   <Link to="/user/wishlist">
                     <i className="fas fa-heart"></i>

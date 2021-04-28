@@ -18,6 +18,7 @@ import RatingModal from "../modal/rating";
 import ShowAverageRating from "./showAverageRating";
 import CardProduct from "../card/cardProduct";
 import AppHeader from "../nav/header";
+import Footer from '../nav/footer'
 import CartModal from "../modal/cartModal";
 import "antd/dist/antd.css";
 import { toast } from "react-toastify";
@@ -169,28 +170,31 @@ const DetailProduct = ({ match }) => {
                   <p>{description}</p>
                   <ul className="product-btns">
                     <li>
-                      <button className="btn btn-primary">
+                      <button className="btn btn-success" style={{marginRight: '20px'}}>
                         <a onClick={handleAddToWishlist}>
-                          <i className="fa fa-heart-o"></i> Add to Wishlist
+                        <i className="fas fa-clipboard-list"></i> Add to Wishlist
                         </a>
                       </button>
-                    </li>
-                    <li>
-                      <Link>
-                        <RatingModal>
-                          <StarRating
-                            name={_id}
-                            numberOfStars={5}
-                            rating={star}
-                            changeRating={onStarClick}
-                            isSelectable={true}
-                            starRatedColor="blue"
-                            starHoverColor="blue"
-                            starDimension="40px"
-                            starSpacing="15px"
-                          />
-                        </RatingModal>
-                      </Link>
+                      <button className="btn btn-warning" style={{marginRight: '20px'}}>
+                          <RatingModal>
+                            <StarRating
+                              name={_id}
+                              numberOfStars={5}
+                              rating={star}
+                              changeRating={onStarClick}
+                              isSelectable={true}
+                              starRatedColor="blue"
+                              starHoverColor="blue"
+                              starDimension="40px"
+                              starSpacing="15px"
+                            />
+                          </RatingModal>
+                      </button>
+                      <button className="btn btn-info" style={{marginRight: '20px'}}>
+                        <a onClick={handleAddToCart}>
+                        <i className="fas fa-shopping-cart"></i> Add to Cart
+                        </a>
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -253,6 +257,7 @@ const DetailProduct = ({ match }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

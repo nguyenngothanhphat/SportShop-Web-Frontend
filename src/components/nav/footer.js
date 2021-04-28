@@ -12,9 +12,9 @@ const Footer = () => {
                                 <h3 className="footer-title">About Us</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                                 <ul className="footer-links">
-                                    <li><Link><i className="fa fa-map-marker"></i>1734 Stonecoal Road</Link></li>
-                                    <li><Link><i className="fa fa-phone"></i>+021-95-51-84</Link></li>
-                                    <li><Link><i className="fa fa-envelope-o"></i>email@email.com</Link></li>
+                                    <li><Link><i className="fa fa-map-marker"></i>142 Pham Phu Thu</Link></li>
+                                    <li><Link><i className="fa fa-phone"></i>0941992082</Link></li>
+                                    <li><Link><i className="fa fa-envelope-o"></i>thanhphat19@gmail.com</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -75,7 +75,7 @@ const Footer = () => {
                                 <li><Link><i className="fa fa-cc-amex"></i></Link></li>
                             </ul>
                             <span className="copyright">
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true"></i> by <Link href="https://colorlib.com" target="_blank">Colorlib</Link>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true"></i> by <Link target="_blank">Thành Phát</Link>
                             </span>
                         </div>
                     </div>

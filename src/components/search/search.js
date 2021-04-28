@@ -34,7 +34,7 @@ const Search = () => {
         placeholder="Search product"
         style={{
           borderRadius: "40px 0px 0px 40px",
-          width: "435px",
+          width: "300px",
         }}
         name="search"
         onChange={handleChange}

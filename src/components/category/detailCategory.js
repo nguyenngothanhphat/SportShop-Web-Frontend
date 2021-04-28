@@ -3,6 +3,7 @@ import { getCategory } from "../../util/api/category-apis";
 import CardProduct from "../card/cardProduct";
 import Header from '../nav/header';
 import Footer from '../nav/footer';
+// import TypeWriter from '../Typewriter/typeWriter'
 
 const CategoryHome = ({ match }) => {
   const [category, setCategory] = useState({});

@@ -98,7 +98,7 @@ const CardProduct = ({ product }) => {
 
       <div
         className="product "
-        style={{ width: "245px", marginLeft: "30px", marginBottom: "35px" }}
+        style={{ width: "245px", marginLeft: "30px", marginBottom: "65px" }}
       >
         <div className="product-img">
           <img src={images && images.length ? images[0].url : ""} alt="" />

@@ -26,8 +26,6 @@ const Filter = () => {
   const [ok, setOk] = useState(false);
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
-  const [brands, setBrands] = useState([]);
-  const [brand, setBrand] = useState("");
   const [colors, setColors] = useState(["Chocolate", "Chocolate Coconut", "Vanilla Espresso", "Mojito", "Orange mango", "Peach Tea", "Banana", "Blueberry", "Chocolate mint", "Milk Tea", "White Chocolate", "Chocolate Mint", "Chocolate Smooth"])
   const [color, setColor] = useState("");
   const [shipping, setShipping] = useState("");
@@ -43,7 +41,7 @@ const Filter = () => {
     loadCategories();
     // fetch subcategories
     loadSubs();
-    loadBrands();
+    // loadBrands();
   }, []);
 
   /* Load products by default on page load */
@@ -60,10 +58,6 @@ const Filter = () => {
 
   const loadCategories = () => {
     getCategories().then(res => setCategories(res.data))
-  }
-
-  const loadBrands = () => {
-    getBrands().then(res => setBrands(res.data))
   }
 
   /* Load products on user search input */
@@ -99,6 +93,8 @@ const Filter = () => {
     setPrice(value);
     setStar("");
     setSub("");
+    setColor("");
+    setShipping("");
     setTimeout(() => {
       setOk(!ok);
     }, 300);
@@ -128,6 +124,10 @@ const Filter = () => {
       payload: { text: "" },
     });
     setPrice([0, 0]);
+    setStar("");
+    setSub("");
+    setColor("");
+    setShipping("");
     // console.log(e.target.value);
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
@@ -156,6 +156,8 @@ const Filter = () => {
     setCategoryIds([]);
     setStar(num);
     setSub("");
+    setColor("");
+    setShipping("");
     fetchProducts({ stars: num });
   };
 
@@ -192,30 +194,9 @@ const Filter = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
+    setColor("");
+    setShipping("");
     fetchProducts({ sub });
-  };
-
-  const showBrands = () => {
-    brands.map((brand) => (
-      <div key={brand._id} onClick={() => handleBrand(brand)} className="p-1 m-1 badge badge-secondary"
-        style={{ cursor: "pointer" }}>
-        {brand.name}
-      </div>
-    ))
-  }
-
-  const handleBrand = (brand) => {
-    console.log("Brand", brand);
-    setBrand(brand);
-    dispatch({
-      type: "SEARCH_QUERY",
-      payload: { text: "" },
-    });
-    setPrice([0, 0]);
-    setCategoryIds([]);
-    setStar("");
-    setSub("");
-    fetchProducts({ brand });
   };
 
   // 8. show products based on color
@@ -242,9 +223,8 @@ const Filter = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
-    setBrand("");
     setColor(e.target.value);
-    // setShipping("");
+    setShipping("");
     fetchProducts({ color: e.target.value });
   };
 
@@ -280,7 +260,6 @@ const Filter = () => {
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar("");
-    setBrand("");
     setColor("");
     setShipping(e.target.value);
     fetchProducts({ shipping: e.target.value });
@@ -294,7 +273,7 @@ const Filter = () => {
           <div className="col-md-3 pt-2">
             <h4>Search/Filter</h4>
             <hr />
-            <Menu defaultOpenKeys={["1", "2", "3", "4", "5"]} mode="inline">
+            <Menu defaultOpenKeys={["1", "2", "3", "4", "5", "6"]} mode="inline">
               {/* Price range */}
               <SubMenu
                 key="1"
@@ -354,23 +333,9 @@ const Filter = () => {
                 </div>
               </SubMenu>
 
-              {/* brand */}
-              <SubMenu
-                key="5"
-                title={
-                  <span className="h6">
-                    <DownSquareOutlined /> Brand
-                </span>
-                }
-              >
-                <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
-                  {showBrands()}
-                </div>
-              </SubMenu>
-
               {/* smell */}
               <SubMenu
-                key="6"
+                key="5"
                 title={
                   <span className="h6">
                     <DownSquareOutlined /> Smell
@@ -384,7 +349,7 @@ const Filter = () => {
 
               {/* shipping */}
               <SubMenu
-                key="7"
+                key="6"
                 title={
                   <span className="h6">
                     <DownSquareOutlined /> Shipping

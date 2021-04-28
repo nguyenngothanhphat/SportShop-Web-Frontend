@@ -36,12 +36,12 @@ import CreateCoupon from './components/admin/coupon/createCoupon';
 import Payment from './components/shoppingCart/payment';
 import AllUsers from './components/admin/user/showUsers';
 import UpdateUser from './components/admin/user/updateUser';
+import AdminPassword from './components/admin/user/password'
 import "./styles.css";
 
 /* import private */
 import UserPrivate from './components/private/userPrivate';
 import AdminPrivate from './components/private/adminPrivate';
-import SellerPrivate from './components/private/sellerPrivate';
 
 /* import firebase */
 import { auth } from "./config/firebase";
@@ -106,6 +106,7 @@ const Routes = () => {
         <AdminPrivate path="/admin/products" exact component={AllProducts} />
         <AdminPrivate path="/admin/users" exact component={AllUsers} />
         <AdminPrivate path="/admin/user/:userId" exact component={UpdateUser} />
+        <AdminPrivate path="/admin/password" exact component={AdminPassword} />
         {/* <SellerPrivate path="/seller/product" exact component={CreateProduct} />
         <SellerPrivate path="/seller/product/:slug" exact component={UpdateProduct} />
         <SellerPrivate path="/seller/products" exact component={AllProducts} /> */}
