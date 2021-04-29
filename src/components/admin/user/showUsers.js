@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import { getUsers } from "../../../util/api/user-apis";
+import { getUsers, removeUser } from "../../../util/api/user-apis";
 import Navigation from "../nav/navigation";
 import HeaderAdmin from "../header/headerAdmin";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState("");
 
-  // const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadUsers();
@@ -19,6 +21,19 @@ const AllUsers = () => {
   const loadUsers = () => {
     getUsers().then((data) => setUsers(data.data));
   };
+
+  const handleRemove = (userId) => {
+    if (window.confirm("Are you delete ?")) {
+      setLoading(true);
+      removeUser(userId, user.token).then(res => {
+          getUsers().then(res => setUsers(res.data));
+          setLoading(false);
+          toast.error(`${res.data.name} was deleted`)
+      }).catch(err => {
+          console.log("🚀 ~ file: createCoupon.js ~ line 51 ~ removeCoupon ~ err", err)
+      })
+  }
+  }
 
   return (
     <>
@@ -54,7 +69,7 @@ const AllUsers = () => {
                             <EditOutlined className="text-danger pointer" />
                           </span>
                         </Link>
-                        <DeleteOutlined className="text-danger pointer" />
+                        <DeleteOutlined onClick={() => handleRemove(user._id)} className="text-danger pointer" />
                       </td>
                     </tr>
                   );

@@ -108,7 +108,7 @@ const UpdateProduct = ({ match, history }) => {
         updateProduct(slug, values, user.token)
             .then((res) => {
                 setLoading(false);
-                toast.success(`"${res.data.title}" is updated`);
+                toast.success(`"${res.data.title}" is updated`, {position: "top-center"});
                 history.push("/admin/products");
             })
             .catch((err) => {

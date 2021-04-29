@@ -55,7 +55,7 @@ const CardProduct = ({ product }) => {
     e.preventDefault();
     addWishlist(product._id, user.token).then((res) => {
       console.log("Add to wishlist", res.data);
-      toast.success("Added to Wishlist");
+      toast.success("Added to Wishlist", {position: "top-center"});
       history.push("/user/wishlist");
     });
   };
@@ -101,10 +101,9 @@ const CardProduct = ({ product }) => {
         style={{ width: "245px", marginLeft: "30px", marginBottom: "65px" }}
       >
         <div className="product-img">
-          <img src={images && images.length ? images[0].url : ""} alt="" />
+          <img src={images && images.length ? images[0].url : ""} alt="" style={{objectFit: "cover", height: "300px", width: "245px", padding: "0", margin:"0 auto"}} />
         </div>
         <div className="product-body">
-          <p className="product-category">{slug}</p>
           <h3 className="product-name">
             <Link to={`/product/${slug}`}>{title}</Link>
           </h3>

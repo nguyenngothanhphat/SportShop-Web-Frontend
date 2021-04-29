@@ -13,6 +13,8 @@ import {
   createCashOrderForUser,
 } from "../../util/api/user-apis";
 
+import {getCoupons} from '../../util/api/coupon-apis';
+
 import "antd/dist/antd.css";
 import "react-quill/dist/quill.snow.css";
 
@@ -22,6 +24,7 @@ const CheckOut = ({ history }) => {
   const [address, setAddress] = useState("");
   const [addressSaved, setAddressSaved] = useState(false);
   const [coupon1, setCoupon] = useState("");
+  const [showCoupons, setShowCoupons] = useState([]);
 
   /* Discount price */
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
@@ -37,6 +40,7 @@ const CheckOut = ({ history }) => {
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
     });
+    getCoupons().then(data => setShowCoupons(data.data));
   }, []);
 
   const saveAddressToDb = () => {
@@ -44,7 +48,7 @@ const CheckOut = ({ history }) => {
     saveUserAddress(user.token, address).then((res) => {
       if (res.data.ok) {
         setAddressSaved(true);
-        toast.success("address saved");
+        toast.success("Address saved", {position: "top-center"});
       }
     });
   };
@@ -66,7 +70,7 @@ const CheckOut = ({ history }) => {
       setTotal(0);
       setTotalAfterDiscount(0);
       setCoupon("");
-      toast.success("Cart is empty. Continue shopping.");
+      toast.success("Cart is empty. Continue shopping.", {position: "top-center"});
     });
   };
 
@@ -99,7 +103,7 @@ const CheckOut = ({ history }) => {
     return (
       <>
         <ReactQuill theme="snow" value={address} onChange={setAddress} />
-        <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
+        <button className="btn btn-outline-info mt-2" onClick={saveAddressToDb}>
           Save
         </button>
       </>
@@ -131,9 +135,15 @@ const CheckOut = ({ history }) => {
           className="form-control"
           value={coupon1}
         />
-        <button onClick={applyDiscountCoupon} className="btn btn-primary mt-2">
+        <button onClick={applyDiscountCoupon} className="btn btn-outline-info mt-2">
           Apply
         </button>
+        <hr />
+        {showCoupons.map((showCoupon, index) => {
+          return (
+            <p key={index}>{showCoupon.name}</p>
+          )
+        })}
       </>
     );
   };
@@ -196,7 +206,7 @@ const CheckOut = ({ history }) => {
           <hr />
           <p>Cart Total: ${total}</p>
           {totalAfterDiscount > 0 && (
-            <p className="bg-success p-2">
+            <p className="bg-success p-2" style={{color: "white"}}>
               Discount Applied: Total Payable: ${totalAfterDiscount}
             </p>
           )}
@@ -204,7 +214,7 @@ const CheckOut = ({ history }) => {
             <div className="col-md-6">
               {COD ? (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-outline-info"
                   disabled={!addressSaved || !products.length}
                   onClick={createCashOrder}
                 >
@@ -212,7 +222,7 @@ const CheckOut = ({ history }) => {
                 </button>
               ) : (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-outline-info"
                   disabled={!addressSaved || !products.length}
                   onClick={() => history.push("/payment")}
                 >
@@ -225,7 +235,7 @@ const CheckOut = ({ history }) => {
               <button
                 disabled={!products.length}
                 onClick={emptyCart}
-                className="btn btn-primary"
+                className="btn btn-outline-danger"
               >
                 Empty Cart
               </button>

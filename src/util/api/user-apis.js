@@ -134,3 +134,11 @@ console.log("🚀 ~ file: user-apis.js ~ line 129 ~ updateUser ~ user", user)
     }
   })
 }
+
+export const removeUser = async (userId, authtoken) => {
+  return await axios.delete(`${API}/user/${userId}`, {
+    headers: {
+      authtoken,
+    }
+  })
+}

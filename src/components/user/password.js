@@ -19,7 +19,7 @@ const Password = () => {
       .then(() => {
         setLoading(false);
         setPassword("");
-        toast.success("Password updated");
+        toast.success("Password updated", {position: "top-center"});
       })
       .catch((err) => {
         setLoading(false);

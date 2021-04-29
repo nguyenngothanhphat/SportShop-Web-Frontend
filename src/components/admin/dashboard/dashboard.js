@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const handleStatusChange = (orderId, orderStatus) => {
     changeStatus(orderId, orderStatus, user.token).then((res) => {
-      toast.success("Status updated");
+      toast.success("Status updated", {position: "top-center"});
       loadOrders();
     });
   };

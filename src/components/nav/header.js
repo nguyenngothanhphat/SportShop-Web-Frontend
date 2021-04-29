@@ -22,7 +22,7 @@ const Header = () => {
       payload: null,
     });
     history.push("/login");
-  };
+  }; 
 
   return (
     // <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
@@ -163,11 +163,6 @@ const Header = () => {
             <div className="col-md-3">
               <div className="header-logo">
                 <Link to="/" className="logo">
-                  {/* <img
-                    src="https://images-platform.99static.com/5BxXBtjYaE26YEilreN-dMWuJGE=/95x94:895x894/500x500/top/smart/99designs-contests-attachments/115/115127/attachment_115127503"
-                    style={{ width: "80%", marginTop: "-68px" }}
-                    alt="logo"
-                  /> */}
                   <h3 style={{color: "white", marginTop: "20px", marginLeft: "20px"}}>TP Supplement</h3>
                 </Link>
               </div>

@@ -40,7 +40,7 @@ const Search = () => {
         onChange={handleChange}
         value={text}
       />
-      <button className="search-btn">Search</button>
+      <button className="search-btn" onClick={handleSubmit}>Search</button>
     </form>
   );
 };

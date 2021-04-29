@@ -94,7 +94,7 @@ const Cart = ({ history }) => {
     let cart = [];
 
     if (count > quantity) {
-      toast.error(`Max available quantity: ${quantity}`);
+      toast.error(`Max available quantity: ${quantity}`, {position: "top-center"});
       return;
     }
 

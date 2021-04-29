@@ -13,6 +13,7 @@ import { DollarOutlined, DownSquareOutlined, StarOutlined } from "@ant-design/ic
 import Star from '../star/star';
 
 import Header from "../nav/header";
+import Footer from '../nav/footer';
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -382,6 +383,7 @@ const Filter = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
