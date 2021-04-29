@@ -175,7 +175,7 @@ const DetailProduct = ({ match }) => {
                         <i className="fas fa-clipboard-list"></i> Add to Wishlist
                         </a>
                       </button>
-                      <button className="btn btn-warning" style={{marginRight: '20px'}}>
+                      <button className="btn btn-success" style={{marginRight: '20px'}}>
                           <RatingModal>
                             <StarRating
                               name={_id}
@@ -190,7 +190,7 @@ const DetailProduct = ({ match }) => {
                             />
                           </RatingModal>
                       </button>
-                      <button className="btn btn-info" style={{marginRight: '20px'}}>
+                      <button className="btn btn-danger" style={{marginRight: '20px'}}>
                         <a onClick={handleAddToCart}>
                         <i className="fas fa-shopping-cart"></i> Add to Cart
                         </a>

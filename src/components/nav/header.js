@@ -85,7 +85,7 @@ const Header = () => {
       <div id="top-header">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-7">
+            <div className="col-md-9">
               <ul className="header-links pull-left">
                 <li>
                   <Link>
@@ -104,7 +104,7 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-3">
               <ul className="header-links pull-right">
                 {!user && (
                   <li>
@@ -168,6 +168,7 @@ const Header = () => {
                     style={{ width: "80%", marginTop: "-68px" }}
                     alt="logo"
                   /> */}
+                  <h3 style={{color: "white", marginTop: "20px", marginLeft: "20px"}}>TP Supplement</h3>
                 </Link>
               </div>
             </div>
